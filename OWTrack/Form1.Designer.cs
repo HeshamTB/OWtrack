@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.WinBut = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -79,7 +80,7 @@
             this.Wins.AutoSize = true;
             this.Wins.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Wins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Wins.Location = new System.Drawing.Point(70, 75);
+            this.Wins.Location = new System.Drawing.Point(75, 75);
             this.Wins.Name = "Wins";
             this.Wins.Size = new System.Drawing.Size(40, 42);
             this.Wins.TabIndex = 3;
@@ -90,7 +91,7 @@
             this.Losses.AutoSize = true;
             this.Losses.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Losses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Losses.Location = new System.Drawing.Point(153, 73);
+            this.Losses.Location = new System.Drawing.Point(130, 75);
             this.Losses.Name = "Losses";
             this.Losses.Size = new System.Drawing.Size(40, 42);
             this.Losses.TabIndex = 4;
@@ -101,7 +102,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(116, 75);
+            this.label3.Location = new System.Drawing.Point(112, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 42);
             this.label3.TabIndex = 5;
@@ -109,7 +110,7 @@
             // 
             // WinBut
             // 
-            this.WinBut.Location = new System.Drawing.Point(12, 87);
+            this.WinBut.Location = new System.Drawing.Point(67, 132);
             this.WinBut.Name = "WinBut";
             this.WinBut.Size = new System.Drawing.Size(52, 26);
             this.WinBut.TabIndex = 6;
@@ -119,7 +120,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(199, 89);
+            this.button2.Location = new System.Drawing.Point(125, 132);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(52, 26);
             this.button2.TabIndex = 6;
@@ -127,22 +128,36 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(103, 73);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 42);
+            this.label2.TabIndex = 5;
+            this.label2.Text = ":";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 170);
+            this.Controls.Add(this.Wins);
+            this.Controls.Add(this.Losses);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.WinBut);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.Losses);
-            this.Controls.Add(this.Wins);
             this.Controls.Add(this.Time);
             this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "OWTrack";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,6 +174,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button WinBut;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
     }
 }
 
