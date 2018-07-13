@@ -9,10 +9,11 @@ namespace OWTrack
 {
     class Tracker
     {
+        private int wins, losses = 0;
         
         public void Track()
         {
-
+            
         }
 
         public bool owRunning()
@@ -21,5 +22,10 @@ namespace OWTrack
                             .FirstOrDefault(p => p.MainModule.FileName.StartsWith(@"D:\Hesham\installed Games\Overwatch")) != default(Process);
             return isRunning;
         }
+
+        public void addWin() { wins++; }
+        public void addLoss() { losses++; }
+        public int GetWins() { return wins; }
+        public int GetLosses() { return losses; }
     }
 }

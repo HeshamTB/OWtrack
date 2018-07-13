@@ -43,5 +43,21 @@ namespace OWTrack
                 status.ForeColor = Color.Red;
            }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tr.addWin();
+            update();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tr.addLoss();
+            update();
+        }
+        private void update()
+        {
+            Wins.Text = tr.GetWins().ToString();
+            Losses.Text = tr.GetLosses().ToString();
+        }        
     }
 }
