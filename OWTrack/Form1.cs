@@ -31,17 +31,24 @@ namespace OWTrack
 
         private void checkStatus()
         {
-            Time.Text = DateTime.Now.ToString("h:mm tt");
-           if (tr.owRunning())
-           {                                
-                status.Text = IS_RUNNING;
-                status.ForeColor = Color.FromArgb(128, 255, 128);
-           }
-           else
-           {
-                status.Text = NOT_RUNNING;
-                status.ForeColor = Color.Red;
-           }
+            try
+            {
+                Time.Text = DateTime.Now.ToString("h:mm tt");
+                if (tr.owRunning())
+                {
+                    status.Text = IS_RUNNING;
+                    status.ForeColor = Color.FromArgb(128, 255, 128);
+                }
+                else
+                {
+                    status.Text = NOT_RUNNING;
+                    status.ForeColor = Color.Red;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);                
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
