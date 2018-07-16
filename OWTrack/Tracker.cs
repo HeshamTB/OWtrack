@@ -15,12 +15,20 @@ namespace OWTrack
         {
             
         }
-
+       
         public bool owRunning()
-        {        
-            bool isRunning = Process.GetProcessesByName("Overwatch")
-                            .FirstOrDefault(p => p.MainModule.FileName.StartsWith(@"D:\Hesham\installed Games\Overwatch")) != default(Process);
-            return isRunning;
+        {
+            try
+            {
+                bool isRunning = Process.GetProcessesByName("Overwatch")
+                                .FirstOrDefault(p => p.MainModule.FileName.StartsWith(@"D:\Hesham\installed Games\Overwatch")) != default(Process);
+                return isRunning;
+            }
+            catch (Exception e)
+            {
+                Exception ex = new Exception("Error in tracking Overwatch.exe");
+                throw ex;
+            }
         }
 
         public void addWin() { wins++; }
