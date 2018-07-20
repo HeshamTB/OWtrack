@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace OWTrack
 {
@@ -16,7 +9,6 @@ namespace OWTrack
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
-
 
         public Form1()
         {
@@ -56,11 +48,13 @@ namespace OWTrack
             tr.addWin();
             update();
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             tr.addLoss();
             update();
         }
+
         private void update()
         {
             Wins.Text = tr.GetWins().ToString();
