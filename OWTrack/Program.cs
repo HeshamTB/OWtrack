@@ -18,5 +18,6 @@ namespace OWTrack
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+        public static string Version = "1.2";
     }
 }

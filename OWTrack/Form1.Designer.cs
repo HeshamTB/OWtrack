@@ -39,6 +39,7 @@
             this.WinBut = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +81,7 @@
             this.Wins.AutoSize = true;
             this.Wins.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Wins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Wins.Location = new System.Drawing.Point(75, 75);
+            this.Wins.Location = new System.Drawing.Point(68, 75);
             this.Wins.Name = "Wins";
             this.Wins.Size = new System.Drawing.Size(40, 42);
             this.Wins.TabIndex = 3;
@@ -91,7 +92,7 @@
             this.Losses.AutoSize = true;
             this.Losses.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Losses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Losses.Location = new System.Drawing.Point(130, 75);
+            this.Losses.Location = new System.Drawing.Point(137, 75);
             this.Losses.Name = "Losses";
             this.Losses.Size = new System.Drawing.Size(40, 42);
             this.Losses.TabIndex = 4;
@@ -131,19 +132,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label2.Font = new System.Drawing.Font("Monospac821 BT", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(103, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 42);
+            this.label2.Size = new System.Drawing.Size(42, 45);
             this.label2.TabIndex = 5;
-            this.label2.Text = ":";
+            this.label2.Text = "-";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Monospac821 BT", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 150);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 11);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "label4";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 170);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Wins);
             this.Controls.Add(this.Losses);
             this.Controls.Add(this.button2);
@@ -175,6 +187,7 @@
         private System.Windows.Forms.Button WinBut;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
