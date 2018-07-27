@@ -14,6 +14,8 @@ namespace OWTrack
         {
             InitializeComponent();
             checkStatus();
+            label4.Text = Program.Version;
+            Text = "OWTrack " + Program.Version;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
