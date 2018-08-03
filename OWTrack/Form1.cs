@@ -14,6 +14,8 @@ namespace OWTrack
         {
             InitializeComponent();
             checkStatus();
+            label4.Text = Program.Version;
+            Text = "OWTrack " + Program.Version;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -55,10 +57,23 @@ namespace OWTrack
             update();
         }
 
+        private void reduceWinBut_Click(object sender, EventArgs e)
+        {
+            tr.reduceWin();
+            update();
+        }
+
+        private void reduceLossBut_Click(object sender, EventArgs e)
+        {
+            tr.rediceLoss();
+            update();
+        }
+
         private void update()
         {
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
-        }        
+        }
+        
     }
 }

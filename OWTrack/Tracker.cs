@@ -31,6 +31,8 @@ namespace OWTrack
 
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
+        public void reduceWin() { wins--; }
+        public void rediceLoss() { losses--; }
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
     }
