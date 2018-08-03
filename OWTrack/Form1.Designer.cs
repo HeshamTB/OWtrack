@@ -40,6 +40,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.reduceLossBut = new System.Windows.Forms.Button();
+            this.reduceWinBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -144,17 +146,39 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Monospac821 BT", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 150);
+            this.label4.Location = new System.Drawing.Point(7, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 11);
             this.label4.TabIndex = 7;
             this.label4.Text = "label4";
+            // 
+            // reduceLossBut
+            // 
+            this.reduceLossBut.Location = new System.Drawing.Point(183, 133);
+            this.reduceLossBut.Name = "reduceLossBut";
+            this.reduceLossBut.Size = new System.Drawing.Size(20, 24);
+            this.reduceLossBut.TabIndex = 8;
+            this.reduceLossBut.Text = "-";
+            this.reduceLossBut.UseVisualStyleBackColor = true;
+            this.reduceLossBut.Click += new System.EventHandler(this.reduceLossBut_Click);
+            // 
+            // reduceWinBut
+            // 
+            this.reduceWinBut.Location = new System.Drawing.Point(43, 133);
+            this.reduceWinBut.Name = "reduceWinBut";
+            this.reduceWinBut.Size = new System.Drawing.Size(20, 24);
+            this.reduceWinBut.TabIndex = 9;
+            this.reduceWinBut.Text = "+";
+            this.reduceWinBut.UseVisualStyleBackColor = true;
+            this.reduceWinBut.Click += new System.EventHandler(this.reduceWinBut_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 170);
+            this.Controls.Add(this.reduceWinBut);
+            this.Controls.Add(this.reduceLossBut);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Wins);
             this.Controls.Add(this.Losses);
@@ -188,6 +212,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button reduceLossBut;
+        private System.Windows.Forms.Button reduceWinBut;
     }
 }
 
