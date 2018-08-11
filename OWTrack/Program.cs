@@ -8,6 +8,7 @@ namespace OWTrack
 {
     static class Program
     {
+        public static string Version = "1.2.1";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,6 +19,6 @@ namespace OWTrack
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-        public static string Version = "1.2.1";
+        
     }
 }
