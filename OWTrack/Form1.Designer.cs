@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reduceLossBut = new System.Windows.Forms.Button();
             this.reduceWinBut = new System.Windows.Forms.Button();
+            this.clearBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -168,15 +169,26 @@
             this.reduceWinBut.Name = "reduceWinBut";
             this.reduceWinBut.Size = new System.Drawing.Size(20, 24);
             this.reduceWinBut.TabIndex = 9;
-            this.reduceWinBut.Text = "+";
+            this.reduceWinBut.Text = "-";
             this.reduceWinBut.UseVisualStyleBackColor = true;
             this.reduceWinBut.Click += new System.EventHandler(this.reduceWinBut_Click);
+            // 
+            // clearBut
+            // 
+            this.clearBut.Location = new System.Drawing.Point(209, 132);
+            this.clearBut.Name = "clearBut";
+            this.clearBut.Size = new System.Drawing.Size(49, 25);
+            this.clearBut.TabIndex = 10;
+            this.clearBut.Text = "clear";
+            this.clearBut.UseVisualStyleBackColor = true;
+            this.clearBut.Click += new System.EventHandler(this.clearBut_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 170);
+            this.Controls.Add(this.clearBut);
             this.Controls.Add(this.reduceWinBut);
             this.Controls.Add(this.reduceLossBut);
             this.Controls.Add(this.label4);
@@ -214,6 +226,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button reduceLossBut;
         private System.Windows.Forms.Button reduceWinBut;
+        private System.Windows.Forms.Button clearBut;
     }
 }
 

@@ -57,13 +57,29 @@ namespace OWTrack
 
         private bool saveExist()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
-            else return false;
+            try
+            {
+                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
+                else return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }            
         }
 
         private Tracker savedTracker()
         {
-            return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+            try
+            {
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;                
+            }
         }
         
         private void timer1_Tick(object sender, EventArgs e)
@@ -100,6 +116,11 @@ namespace OWTrack
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
         }
-        
+
+        private void clearBut_Click(object sender, EventArgs e)
+        {
+            tr.reset();
+            update();
+        }
     }
 }

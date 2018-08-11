@@ -29,6 +29,7 @@ namespace OWTrack
             }
         }
 
+        public void reset() { wins = 0; losses = 0; }
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
         public void reduceWin() { wins--; }
