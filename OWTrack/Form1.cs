@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace OWTrack
 {
@@ -13,20 +15,17 @@ namespace OWTrack
         public Form1()
         {
             InitializeComponent();
+            loadSave();
             checkStatus();
             label4.Text = Program.Version;
-            Text = "OWTrack " + Program.Version;
+            Text = "OWTrack " + Program.Version;           
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            checkStatus(); 
-        }
-
+                
         private void checkStatus()
         {
             try
             {
+                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
                 Time.Text = DateTime.Now.ToString("h:mm tt");
                 if (tr.owRunning())
                 {
@@ -43,6 +42,33 @@ namespace OWTrack
             {
                 MessageBox.Show(e.Message);                
             }
+        }
+
+        private void loadSave()
+        {
+            if (saveExist())
+            {
+                tr.wins = savedTracker().wins;
+                tr.losses = savedTracker().losses;
+                update();
+            }
+            else MessageBox.Show("no save");
+        }
+
+        private bool saveExist()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
+            else return false;
+        }
+
+        private Tracker savedTracker()
+        {
+            return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+        }
+        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            checkStatus();
         }
 
         private void button1_Click(object sender, EventArgs e)
