@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-
+using System.IO;
 
 namespace OWTrack
 {
     class Tracker
     {
-        private int wins, losses = 0;
+        public int wins, losses = 0;
         
         public void Track()
         {
             
-        }
-       
+        }                
+
         public bool owRunning()
         {
             try
@@ -29,6 +29,7 @@ namespace OWTrack
             }
         }
 
+        public void reset() { wins = 0; losses = 0; }
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
         public void reduceWin() { wins--; }

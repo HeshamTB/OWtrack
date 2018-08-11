@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace OWTrack
 {
@@ -13,20 +15,17 @@ namespace OWTrack
         public Form1()
         {
             InitializeComponent();
+            loadSave();
             checkStatus();
             label4.Text = Program.Version;
-            Text = "OWTrack " + Program.Version;
+            Text = "OWTrack " + Program.Version;           
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            checkStatus(); 
-        }
-
+                
         private void checkStatus()
         {
             try
             {
+                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
                 Time.Text = DateTime.Now.ToString("h:mm tt");
                 if (tr.owRunning())
                 {
@@ -43,6 +42,49 @@ namespace OWTrack
             {
                 MessageBox.Show(e.Message);                
             }
+        }
+
+        private void loadSave()
+        {
+            if (saveExist())
+            {
+                tr.wins = savedTracker().wins;
+                tr.losses = savedTracker().losses;
+                update();
+            }
+            else MessageBox.Show("no save");
+        }
+
+        private bool saveExist()
+        {
+            try
+            {
+                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
+                else return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }            
+        }
+
+        private Tracker savedTracker()
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;                
+            }
+        }
+        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            checkStatus();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,6 +116,11 @@ namespace OWTrack
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
         }
-        
+
+        private void clearBut_Click(object sender, EventArgs e)
+        {
+            tr.reset();
+            update();
+        }
     }
 }
