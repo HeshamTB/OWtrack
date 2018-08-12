@@ -24,8 +24,7 @@ namespace OWTrack
         private void checkStatus()
         {
             try
-            {
-                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
+            {               
                 Time.Text = DateTime.Now.ToString("h:mm tt");
                 if (tr.owRunning())
                 {
@@ -115,6 +114,7 @@ namespace OWTrack
         {
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
         }
 
         private void clearBut_Click(object sender, EventArgs e)
