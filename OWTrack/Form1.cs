@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -11,6 +11,7 @@ namespace OWTrack
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
+        private bool SRonce = false;
 
         public Form1()
         {
@@ -114,12 +115,48 @@ namespace OWTrack
         {
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
+            if (tr.newSR == 0)
+            {
+                if (tr.srDiff() < 1) { srLabel.Text = tr.startSR.ToString() + " - 0"; }
+                else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            }
+            else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            srTextBox.Text = null;
             File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
         }
 
         private void clearBut_Click(object sender, EventArgs e)
         {
             tr.reset();
+            update();
+        }       
+
+        private void srBut_Click(object sender, EventArgs e)
+        {
+            int sr = 0;
+            try
+            {
+                sr = Convert.ToInt32(srTextBox.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Enter a Number!");
+                return;
+            }
+            catch (OverflowException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            finally
+            {
+                if (!SRonce)
+                {
+                    tr.startSR = sr;
+                    SRonce = true;
+                }
+                else tr.newSR = sr;
+            }
             update();
         }
     }
