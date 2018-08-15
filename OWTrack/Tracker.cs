@@ -7,7 +7,7 @@ namespace OWTrack
 {
     class Tracker
     {
-        public int wins, losses = 0;
+        public int wins, losses, startSR, newSR, = 0;
         
         public void Track()
         {
@@ -36,5 +36,7 @@ namespace OWTrack
         public void rediceLoss() { losses--; }
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
+        public void newSR(int SR) { newSR = SR; }
+        public int srDiff() {return newSR - startSR;}
     }
 }
