@@ -7,12 +7,18 @@ namespace OWTrack
 {
     class Tracker
     {
-        public int wins, losses, startSR, newSR, = 0;
+        public int wins, losses, startSR, newSR = 0;
         
-        public void Track()
-        {
-            
-        }                
+        public void Track() { }
+        public void reset() { wins = 0; losses = 0; }
+        public void addWin() { wins++; }
+        public void addLoss() { losses++; }
+        public void reduceWin() { wins--; }
+        public void rediceLoss() { losses--; }
+        public int GetWins() { return wins; }
+        public int GetLosses() { return losses; }
+        public void setNewSR(int SR) { newSR = SR; }
+        public int srDiff() { return newSR - startSR; }
 
         public bool owRunning()
         {
@@ -27,16 +33,6 @@ namespace OWTrack
                 Exception ex = new Exception("Error in tracking Overwatch.exe");
                 throw ex;
             }
-        }
-
-        public void reset() { wins = 0; losses = 0; }
-        public void addWin() { wins++; }
-        public void addLoss() { losses++; }
-        public void reduceWin() { wins--; }
-        public void rediceLoss() { losses--; }
-        public int GetWins() { return wins; }
-        public int GetLosses() { return losses; }
-        public void newSR(int SR) { newSR = SR; }
-        public int srDiff() {return newSR - startSR;}
+        }       
     }
 }
