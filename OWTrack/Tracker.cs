@@ -10,7 +10,7 @@ namespace OWTrack
         public int wins, losses, startSR, newSR = 0;
         
         public void Track() { }
-        public void reset() { wins = 0; losses = 0; }
+        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; }
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
         public void reduceWin() { wins--; }

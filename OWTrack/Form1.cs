@@ -115,6 +115,13 @@ namespace OWTrack
         {
             Wins.Text = tr.GetWins().ToString();
             Losses.Text = tr.GetLosses().ToString();
+            if (tr.newSR == 0)
+            {
+                if (tr.srDiff() < 1) { srLabel.Text = tr.startSR.ToString() + " - 0"; }
+                else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            }
+            else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            srTextBox.Text = null;
             File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
         }
 
@@ -150,13 +157,7 @@ namespace OWTrack
                 }
                 else tr.newSR = sr;
             }
-            if (tr.newSR == 0)
-            {
-                if (tr.srDiff() < 1) { srLabel.Text = tr.startSR.ToString() + " - 0";  }
-                else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
-            }
-            else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
-            srTextBox.Text = null;
+            update();
         }
     }
 }
