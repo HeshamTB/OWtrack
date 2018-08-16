@@ -18,8 +18,8 @@ namespace OWTrack
             InitializeComponent();
             loadSave();
             checkStatus();
-            label4.Text = Program.Version;
-            Text = "OWTrack " + Program.Version;           
+            label4.Text = Program.Version.ToString();
+            Text = "OWTrack " + Program.Version.ToString();           
         }
                 
         private void checkStatus()
