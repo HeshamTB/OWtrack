@@ -46,6 +46,7 @@
             this.srTextBox = new System.Windows.Forms.TextBox();
             this.srBut = new System.Windows.Forms.Button();
             this.srLabel = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -215,6 +216,13 @@
             this.srLabel.TabIndex = 13;
             this.srLabel.Text = "0";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "Overwatch.exe";
+            this.openFileDialog1.InitialDirectory = "C:\\";
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +273,7 @@
         private System.Windows.Forms.TextBox srTextBox;
         private System.Windows.Forms.Button srBut;
         private System.Windows.Forms.Label srLabel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

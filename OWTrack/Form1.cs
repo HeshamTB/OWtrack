@@ -47,6 +47,12 @@ namespace OWTrack
             {
                 tr.wins = savedTracker().wins;
                 tr.losses = savedTracker().losses;
+                tr.gamePath = savedTracker().gamePath;
+                if (tr.gamePath == "" || tr.gamePath == null)
+                {
+                    openFileDialog1.Title = "Select Overwatch.exe";
+                    openFileDialog1.ShowDialog();
+                }
                 update();
             }
             else MessageBox.Show("no save");
@@ -155,6 +161,11 @@ namespace OWTrack
                 else tr.newSR = sr;
             }
             update();
+        }
+
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBox.Show("ok");          
         }
     }
 }
