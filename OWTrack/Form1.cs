@@ -48,28 +48,46 @@ namespace OWTrack
                 tr.wins = savedTracker().wins;
                 tr.losses = savedTracker().losses;
                 tr.gamePath = savedTracker().gamePath;
-                if (tr.gamePath == "" || tr.gamePath == null)
-                {
-                    openFileDialog1.Title = "Select Overwatch.exe";
-                    openFileDialog1.ShowDialog();
-                }
+                //if (tr.gamePath == "" || tr.gamePath == null)
+                //{
+                   
+                //}
                 update();
             }
             else MessageBox.Show("no save");
-        }
+        }       
 
         private bool saveExist()
         {
             try
             {
                 if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
-                else return false;
+                else
+                {
+                    getGamePath();
+                    return false;
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 return false;
             }            
+        }
+
+        void getGamePath()
+        {
+            openFileDialog1.Title = "Select Overwatch.exe";
+            openFileDialog1.DefaultExt = "exe";
+            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.CheckPathExists = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tr.gamePath = openFileDialog1.FileName;
+                MessageBox.Show(openFileDialog1.FileName);
+            }
         }
 
         private Tracker savedTracker()
@@ -161,11 +179,6 @@ namespace OWTrack
                 else tr.newSR = sr;
             }
             update();
-        }
-
-        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBox.Show("ok");          
-        }
+        }       
     }
 }

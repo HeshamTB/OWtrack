@@ -221,7 +221,6 @@
             this.openFileDialog1.FileName = "Overwatch.exe";
             this.openFileDialog1.InitialDirectory = "C:\\";
             this.openFileDialog1.RestoreDirectory = true;
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // Form1
             // 
