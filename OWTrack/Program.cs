@@ -22,14 +22,6 @@ namespace OWTrack
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-        private static Version version = new Version(Application.ProductVersion);
-
-        public static Version Version
-        {
-            get
-            {
-                return version;
-            }
-        }
+       public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
     }
 }
