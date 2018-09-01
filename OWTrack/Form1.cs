@@ -47,6 +47,8 @@ namespace OWTrack
             {
                 tr.wins = savedTracker().wins;
                 tr.losses = savedTracker().losses;
+                tr.newSR = savedTracker().newSR;
+                tr.startSR = savedTracker().startSR;
                 update();
             }
             else MessageBox.Show("no save");
