@@ -18,17 +18,18 @@ namespace OWTrack
             InitializeComponent();
             loadSave();
             checkStatus();
-            label4.Text = Program.version.ToString();
-            Text = "OWTrack " + Program.version.ToString();           
+            update();
+            label4.Text = Program.Version.ToString();
+            Text = "OWTrack " + Program.Version.ToString();           
         }
                 
         private void checkStatus()
-        {                        
-            Time.Text = DateTime.Now.ToString("h:mm tt");
-            status.Text = NOT_RUNNING;
-            status.ForeColor = Color.Red;
+        {                                   
             try
             {
+                Time.Text = DateTime.Now.ToString("h:mm tt");
+                status.Text = NOT_RUNNING;
+                status.ForeColor = Color.Red;
                 if (tr.owRunning())
                 {
                     status.Text = IS_RUNNING;
@@ -75,7 +76,7 @@ namespace OWTrack
             }            
         }
 
-        void getGamePath()
+        private void getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
@@ -86,7 +87,6 @@ namespace OWTrack
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 tr.gamePath = openFileDialog1.FileName;
-                MessageBox.Show(openFileDialog1.FileName);
             }
         }
 

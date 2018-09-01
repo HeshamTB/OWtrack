@@ -11,7 +11,6 @@ namespace OWTrack
 {
     static class Program
     {        
-        //public static string Version = Application.ProductVersion;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -22,6 +21,10 @@ namespace OWTrack
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-       public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
+        public static string Version = "1.2.3";
+        //public static string Version = Application.ProductVersion;
+        //public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
     }
 }
