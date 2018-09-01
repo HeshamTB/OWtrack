@@ -8,6 +8,7 @@ namespace OWTrack
     class Tracker
     {
         public int wins, losses, startSR, newSR = 0;
+        public string gamePath;
         
         public void Track() { }
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; }
@@ -20,12 +21,13 @@ namespace OWTrack
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
 
+
         public bool owRunning()
         {
             try
             {
                 bool isRunning = Process.GetProcessesByName("Overwatch")
-                                .FirstOrDefault(p => p.MainModule.FileName.StartsWith(@"D:\Hesham\installed Games\Overwatch")) != default(Process);
+                                .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
                 return isRunning;
             }
             catch (Exception e)

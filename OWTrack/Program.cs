@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Deployment.Application;
+
 
 namespace OWTrack
 {
     static class Program
-    {
-        public static string Version = "1.2.3";
+    {        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,6 +21,10 @@ namespace OWTrack
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-        
+
+        public static string Version = "1.2.4";
+        //public static string Version = Application.ProductVersion;
+        //public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
     }
 }
