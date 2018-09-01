@@ -48,11 +48,8 @@ namespace OWTrack
             {
                 tr.wins = savedTracker().wins;
                 tr.losses = savedTracker().losses;
-                tr.gamePath = savedTracker().gamePath;
-                //if (tr.gamePath == "" || tr.gamePath == null)
-                //{
-                   
-                //}
+                tr.newSR = savedTracker().newSR;
+                tr.startSR = savedTracker().startSR;
                 update();
             }
             else MessageBox.Show("no save");
