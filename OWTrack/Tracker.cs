@@ -9,6 +9,8 @@ namespace OWTrack
     {
         public int wins, losses, startSR, newSR = 0;
         public string gamePath;
+
+        private string[] commonDir = ["C:\Program Files","D:\Program Files"];
         
         public void Track() { }
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; }
@@ -35,6 +37,33 @@ namespace OWTrack
                 Exception ex = new Exception("Error in tracking Overwatch.exe");
                 throw ex;
             }
+        }
+
+        public void LoacteOW() 
+        {
+            try 
+            {
+                string[] files = [];
+                for (int i = 0; i < commonDir.count; i++) 
+                {
+                    files.append(Directory.GetFiles(commonDir[i], "Overwatch*",SearchOption.AllDirectories));
+                }
+                if (files.contians("Overwatch.exe"))
+                {
+                    foreach (string "*Overwatch.exe" in files)
+                    {
+                        
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                MesssageBox.show(e.message);
+            }
+            
+            
+            
         }       
     }
 }
