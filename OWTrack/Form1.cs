@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 
+
 namespace OWTrack
 {
     public partial class Form1 : Form
@@ -20,7 +21,8 @@ namespace OWTrack
             checkStatus();
             update();
             label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();           
+            Text = "OWTrack " + Program.Version.ToString();
+           
         }
                 
         private void checkStatus()
@@ -72,9 +74,9 @@ namespace OWTrack
                         else
                         {
                             if (!tr.LoacteOW())
-                            {
-                                getGamePath();
+                            {                                
                                 st.Close();
+                                getGamePath();
                             }
                             return true;
                         }
@@ -104,11 +106,17 @@ namespace OWTrack
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            DialogResult result = openFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
             {
                 tr.gamePath = openFileDialog1.FileName;
-                update();
             }
+            else if (result == DialogResult.Cancel)
+            {
+                Close();
+            }
+            update();
         }
 
         private Tracker savedTracker()
