@@ -52,8 +52,7 @@ namespace OWTrack
                 tr.startSR = savedTracker().startSR;
                 tr.gamePath = savedTracker().gamePath;
                 update();
-            }
-            else MessageBox.Show("no save");
+            }            
         }       
 
         private bool saveExist()
@@ -72,16 +71,21 @@ namespace OWTrack
                         }
                         else
                         {
-                            getGamePath();
-                            st.Close();
+                            if (!tr.LoacteOW())
+                            {
+                                getGamePath();
+                                st.Close();
+                            }
                             return true;
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("NO data.json");
-                    getGamePath();
+                    if (!tr.LoacteOW())
+                    {
+                        getGamePath(); 
+                    }
                     return false;
                 }
             }
