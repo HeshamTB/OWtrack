@@ -50,19 +50,42 @@ namespace OWTrack
                 tr.losses = savedTracker().losses;
                 tr.newSR = savedTracker().newSR;
                 tr.startSR = savedTracker().startSR;
+                tr.gamePath = savedTracker().gamePath;
                 update();
-            }
-            else MessageBox.Show("no save");
+            }            
         }       
 
         private bool saveExist()
         {
             try
             {
-                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
+                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json"))
+                {
+                    using (StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "/data.json"))
+                    {
+                        string line = st.ReadLine();
+                        if (line.Contains("Overwatch.exe"))
+                        {
+                            st.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            if (!tr.LoacteOW())
+                            {
+                                getGamePath();
+                                st.Close();
+                            }
+                            return true;
+                        }
+                    }
+                }
                 else
                 {
-                    getGamePath();
+                    if (!tr.LoacteOW())
+                    {
+                        getGamePath(); 
+                    }
                     return false;
                 }
             }
@@ -84,6 +107,7 @@ namespace OWTrack
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 tr.gamePath = openFileDialog1.FileName;
+                update();
             }
         }
 
