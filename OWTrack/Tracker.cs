@@ -2,15 +2,15 @@
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
+using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace OWTrack
 {
     class Tracker
     {
         public int wins, losses, startSR, newSR = 0;
-        public string gamePath;
-
-        private string[] commonDir = ["C:\Program Files","D:\Program Files"];
+        public string gamePath;       
         
         public void Track() { }
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; }
@@ -22,7 +22,6 @@ namespace OWTrack
         public int GetLosses() { return losses; }
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
-
 
         public bool owRunning()
         {
@@ -39,31 +38,68 @@ namespace OWTrack
             }
         }
 
-        public void LoacteOW() 
+        /// <summary>
+        /// Not Working!
+        /// </summary>
+        /// <returns></returns>
+        public bool LoacteOW() 
         {
             try 
             {
-                string[] files = [];
-                for (int i = 0; i < commonDir.count; i++) 
+                List<string> paths = new List<string>();
+                string[] filesC = null;
+                string[] filesD = null;
+
+                if (ProgramFilesExist('c')) { filesC = Directory.GetFiles("C:\\Program Files", "Overwatch.exe", SearchOption.AllDirectories); }
+                if (ProgramFilesExist('d')) { filesD = Directory.GetFiles("D:\\Program Files", "Overwatch.exe", SearchOption.AllDirectories); }
+
+                if (filesC != null)
                 {
-                    files.append(Directory.GetFiles(commonDir[i], "Overwatch*",SearchOption.AllDirectories));
-                }
-                if (files.contians("Overwatch.exe"))
-                {
-                    foreach (string "*Overwatch.exe" in files)
+                    for (int i = 0; i < filesC.Length; i++)
                     {
-                        
+                        if (filesC[i].Contains("Overwatch.exe"))
+                        {
+                            paths.Add(filesC[i]);
+                        }
                     }
                 }
 
+                if (filesD != null)
+                {
+                    for (int i = 0; i < filesD.Length - 1; i++)
+                    {
+                        if (filesD[i].Contains("Overwatch.exe"))
+                        {
+                            paths.Add(filesD[i]);
+                        }
+                    } 
+                }
+
+                if (paths.Count > 1)
+                {
+                    //TODO: ask about correct path
+                    return true;
+                }
+
+                else if (paths.Count == 1)
+                {
+                    gamePath = paths[0];
+                    return true;
+                }
+
+                else return false;
+                
             }
             catch (Exception e)
             {
-                MesssageBox.show(e.message);
-            }
-            
-            
-            
-        }       
+                 MessageBox.Show(e.Message);
+                return false;
+            }                        
+        }
+        
+        private bool ProgramFilesExist(char drive)
+        {
+           return Directory.Exists(drive+":\\Program Files");
+        }
     }
 }
