@@ -1,4 +1,4 @@
-# OWtrack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# OWtrack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg) ![CI status](https://img.shields.io/badge/Version-1.3.0-blue.svg)
 
  Track your Overwatch preformance with a shi#ty UI
  
