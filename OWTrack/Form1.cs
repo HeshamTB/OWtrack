@@ -35,7 +35,7 @@ namespace OWTrack
                 if (tr.owRunning())
                 {
                     status.Text = IS_RUNNING;
-                    status.ForeColor = Color.FromArgb(128, 255, 128);
+                    status.ForeColor = Color.FromArgb(0, 192, 0);
                 }                
             }
             catch (Exception e)

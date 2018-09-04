@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -62,7 +63,7 @@
             // status
             // 
             this.status.AutoSize = true;
-            this.status.ForeColor = System.Drawing.Color.Black;
+            this.status.ForeColor = System.Drawing.Color.White;
             this.status.Location = new System.Drawing.Point(93, 36);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(35, 13);
@@ -256,6 +257,7 @@
             this.Controls.Add(this.label3);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OWTrack";
