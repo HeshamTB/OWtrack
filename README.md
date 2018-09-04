@@ -1,4 +1,4 @@
-# OWtrack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# OWtrack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg) [![GitHub](https://img.shields.io/badge/Version-1.3.0-blue.svg)] (https://heshamgit.ddns.net/Hesham/OWtrack/releases) [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
  Track your Overwatch preformance with a shi#ty UI
  
