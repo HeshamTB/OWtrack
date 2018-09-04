@@ -116,6 +116,7 @@ namespace OWTrack
             {
                 Close();
             }
+            FindForm();
             update();
         }
 
