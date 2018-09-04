@@ -47,6 +47,7 @@
             this.srBut = new System.Windows.Forms.Button();
             this.srLabel = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -139,21 +140,21 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Monospac821 BT", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(142, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 45);
+            this.label2.Size = new System.Drawing.Size(31, 42);
             this.label2.TabIndex = 5;
             this.label2.Text = "-";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Monospac821 BT", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 217);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 11);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
             this.label4.Text = "label4";
             // 
@@ -210,11 +211,11 @@
             this.srLabel.AutoSize = true;
             this.srLabel.Font = new System.Drawing.Font("Noto Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.srLabel.ForeColor = System.Drawing.Color.DarkOrchid;
-            this.srLabel.Location = new System.Drawing.Point(183, 26);
+            this.srLabel.Location = new System.Drawing.Point(189, 36);
             this.srLabel.Name = "srLabel";
-            this.srLabel.Size = new System.Drawing.Size(21, 23);
+            this.srLabel.Size = new System.Drawing.Size(65, 23);
             this.srLabel.TabIndex = 13;
-            this.srLabel.Text = "0";
+            this.srLabel.Text = "0 - 0";
             // 
             // openFileDialog1
             // 
@@ -222,11 +223,21 @@
             this.openFileDialog1.InitialDirectory = "C:\\";
             this.openFileDialog1.RestoreDirectory = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(190, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Start - Gain/Loss";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 237);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.srLabel);
             this.Controls.Add(this.srBut);
             this.Controls.Add(this.srTextBox);
@@ -273,6 +284,7 @@
         private System.Windows.Forms.Button srBut;
         private System.Windows.Forms.Label srLabel;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 
+
 namespace OWTrack
 {
     public partial class Form1 : Form
@@ -15,12 +16,13 @@ namespace OWTrack
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();          
             loadSave();
             checkStatus();
             update();
             label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();           
+            Text = "OWTrack " + Program.Version.ToString();
+           
         }
                 
         private void checkStatus()
@@ -50,19 +52,42 @@ namespace OWTrack
                 tr.losses = savedTracker().losses;
                 tr.newSR = savedTracker().newSR;
                 tr.startSR = savedTracker().startSR;
+                tr.gamePath = savedTracker().gamePath;
                 update();
-            }
-            else MessageBox.Show("no save");
+            }            
         }       
 
         private bool saveExist()
         {
             try
             {
-                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json")) { return true; }
+                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json"))
+                {
+                    using (StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "/data.json"))
+                    {
+                        string line = st.ReadLine();
+                        if (line.Contains("Overwatch.exe"))
+                        {
+                            st.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            if (!tr.LoacteOW())
+                            {                                
+                                st.Close();
+                                getGamePath();
+                            }
+                            return true;
+                        }
+                    }
+                }
                 else
                 {
-                    getGamePath();
+                    if (!tr.LoacteOW())
+                    {
+                        getGamePath(); 
+                    }
                     return false;
                 }
             }
@@ -81,10 +106,18 @@ namespace OWTrack
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            DialogResult result = openFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
             {
                 tr.gamePath = openFileDialog1.FileName;
             }
+            else if (result == DialogResult.Cancel)
+            {
+                Close();
+            }
+            FindForm();
+            update();
         }
 
         private Tracker savedTracker()
