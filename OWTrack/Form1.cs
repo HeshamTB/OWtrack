@@ -15,7 +15,7 @@ namespace OWTrack
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();          
             loadSave();
             checkStatus();
             update();
