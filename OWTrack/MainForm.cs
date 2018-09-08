@@ -7,14 +7,14 @@ using System.IO;
 
 namespace OWTrack
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
         private bool SRonce = false;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();          
             loadSave();
