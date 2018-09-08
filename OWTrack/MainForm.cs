@@ -12,6 +12,7 @@ namespace OWTrack
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
+        private string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
         private bool SRonce = false;
 
         public MainForm()
@@ -21,8 +22,7 @@ namespace OWTrack
             checkStatus();
             update();
             label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();
-           
+            Text = "OWTrack " + Program.Version.ToString();           
         }
                 
         private void checkStatus()
@@ -46,6 +46,7 @@ namespace OWTrack
 
         private void loadSave()
         {
+            Directory.CreateDirectory("saves");
             if (saveExist())
             {
                 tr.wins = savedTracker().wins;
@@ -61,9 +62,9 @@ namespace OWTrack
         {
             try
             {
-                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json"))
+                if (File.Exists(savesPath))
                 {
-                    using (StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "/data.json"))
+                    using (StreamReader st = new StreamReader(savesPath))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
@@ -124,7 +125,7 @@ namespace OWTrack
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
             }
             catch (Exception e)
             {
@@ -173,7 +174,7 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
         }
 
         private void clearBut_Click(object sender, EventArgs e)
