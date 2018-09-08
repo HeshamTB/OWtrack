@@ -22,7 +22,7 @@ namespace OWTrack
             Application.Run(new MainForm());
         }
 
-        public static string Version = "1.3.0";
+        public static string Version = "1.4.0a1";
         //public static string Version = Application.ProductVersion;
         //public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
