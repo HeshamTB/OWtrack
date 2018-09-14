@@ -16,6 +16,7 @@ namespace OWTrack
 
         public Form1()
         {
+
             InitializeComponent();          
             loadSave();
             checkStatus();
@@ -120,7 +121,7 @@ namespace OWTrack
             update();
         }
 
-        private Tracker savedTracker()
+        private Tracker savedTracker()//
         {
             try
             {
@@ -173,7 +174,7 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));//
         }
 
         private void clearBut_Click(object sender, EventArgs e)
