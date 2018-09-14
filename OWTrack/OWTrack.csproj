@@ -87,7 +87,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Jeanette-Foshee-Simpsons-11-Rollover-Homer-donut-1.ico</ApplicationIcon>
+    <ApplicationIcon>assets\Jeanette-Foshee-Simpsons-11-Rollover-Homer-donut-1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -156,7 +156,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Jeanette-Foshee-Simpsons-11-Rollover-Homer-donut-1.ico" />
+    <Content Include="assets\Jeanette-Foshee-Simpsons-11-Rollover-Homer-donut-1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
