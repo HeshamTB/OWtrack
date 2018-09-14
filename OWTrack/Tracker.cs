@@ -31,17 +31,13 @@ namespace OWTrack
                                 .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
                 return isRunning;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Exception ex = new Exception("Error in tracking Overwatch.exe");
                 throw ex;
             }
         }
-
-        /// <summary>
-        /// Not Working!
-        /// </summary>
-        /// <returns></returns>
+      
         public bool LoacteOW() 
         {
             try 

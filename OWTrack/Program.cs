@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Deployment.Application;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Deployment.Application;
 
@@ -22,7 +18,7 @@ namespace OWTrack
             Application.Run(new MainForm());
         }
 
-        public static string Version = "1.4.0a1";
+        public static string Version { get; } = "1.4.0a1";
         //public static string Version = Application.ProductVersion;
         //public static Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
