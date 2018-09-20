@@ -13,7 +13,7 @@ namespace OWTrack
         public string gamePath;       
         
         public void Track() { }
-        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; }
+        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
         public void reduceWin() { wins--; }
@@ -31,17 +31,13 @@ namespace OWTrack
                                 .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
                 return isRunning;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Exception ex = new Exception("Error in tracking Overwatch.exe");
                 throw ex;
             }
         }
-
-        /// <summary>
-        /// Not Working!
-        /// </summary>
-        /// <returns></returns>
+      
         public bool LoacteOW() 
         {
             try 

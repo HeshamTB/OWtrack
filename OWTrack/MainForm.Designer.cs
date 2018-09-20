@@ -1,6 +1,6 @@
 ﻿namespace OWTrack
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -126,7 +126,7 @@
             this.WinBut.TabIndex = 6;
             this.WinBut.Text = "win";
             this.WinBut.UseVisualStyleBackColor = true;
-            this.WinBut.Click += new System.EventHandler(this.button1_Click);
+            this.WinBut.Click += new System.EventHandler(this.WinBtn_Click);
             // 
             // button2
             // 
@@ -136,7 +136,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "loss";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.LossBtn_Click);
             // 
             // label2
             // 

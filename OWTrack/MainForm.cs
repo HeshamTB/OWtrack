@@ -7,22 +7,22 @@ using System.IO;
 
 namespace OWTrack
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
+        private string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
         private bool SRonce = false;
 
-        public Form1()
+        public MainForm()
         {
-            InitializeComponent();          
+            InitializeComponent();
             loadSave();
             checkStatus();
             update();
             label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();
-           
+            Text = "OWTrack " + Program.Version.ToString();           
         }
                 
         private void checkStatus()
@@ -46,120 +46,73 @@ namespace OWTrack
 
         private void loadSave()
         {
-            if (saveExist())
+            Directory.CreateDirectory("saves");
+            if (saveManeger.saveExist())
             {
-                tr.wins = savedTracker().wins;
-                tr.losses = savedTracker().losses;
-                tr.newSR = savedTracker().newSR;
-                tr.startSR = savedTracker().startSR;
-                tr.gamePath = savedTracker().gamePath;
-                update();
-            }            
-        }       
-
-        private bool saveExist()
-        {
-            try
-            {
-                if (File.Exists(Directory.GetCurrentDirectory() + "/data.json"))
-                {
-                    using (StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "/data.json"))
+                try
+                {                   
+                    using (StreamReader st = new StreamReader(savesPath))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
                         {
-                            st.Close();
-                            return true;
+                            tr = saveManeger.GetSavedTracker();
+                            st.Close();                            
                         }
                         else
                         {
                             if (!tr.LoacteOW())
-                            {                                
-                                st.Close();
-                                getGamePath();
+                            {
+                                tr.gamePath = getGamePath();
                             }
-                            return true;
+                            st.Close();
                         }
-                    }
-                }
-                else
-                {
-                    if (!tr.LoacteOW())
-                    {
-                        getGamePath(); 
-                    }
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return false;
-            }            
-        }
 
-        private void getGamePath()
+                    }
+                }                
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }                
+                update();
+            }
+            else if (!tr.LoacteOW())
+            {
+                tr.gamePath = getGamePath();
+            }
+        }       
+        
+        private string getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
-            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
-            openFileDialog1.CheckFileExists = true;
-            openFileDialog1.CheckPathExists = true;
-
+            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";           
             DialogResult result = openFileDialog1.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                tr.gamePath = openFileDialog1.FileName;
+                //tr.gamePath = openFileDialog1.FileName;
+                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest\n" + openFileDialog1.FileName );
+                return openFileDialog1.FileName;
             }
-            else if (result == DialogResult.Cancel)
+            else 
             {
-                Close();
-            }
-            FindForm();
-            update();
+                update();
+                return null;
+            }            
         }
 
         private Tracker savedTracker()
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 return null;                
             }
-        }
-        
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            checkStatus();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            tr.addWin();
-            update();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            tr.addLoss();
-            update();
-        }
-
-        private void reduceWinBut_Click(object sender, EventArgs e)
-        {
-            tr.reduceWin();
-            update();
-        }
-
-        private void reduceLossBut_Click(object sender, EventArgs e)
-        {
-            tr.rediceLoss();
-            update();
         }
 
         private void update()
@@ -173,8 +126,41 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tr));
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
         }
+
+        #region Events
+        private void timer1_Tick(object sender, EventArgs e) => checkStatus();
+
+        private void WinBtn_Click(object sender, EventArgs e)
+        {
+            tr.addWin();
+            update();
+        }
+
+        private void LossBtn_Click(object sender, EventArgs e)
+        {
+            tr.addLoss();
+            update();
+        }
+
+        private void reduceWinBut_Click(object sender, EventArgs e)
+        {
+            if (tr.wins > 0)
+            {
+                tr.reduceWin();
+                update();
+            }
+        }
+
+        private void reduceLossBut_Click(object sender, EventArgs e)
+        {
+            if (tr.losses > 0)
+            {
+                tr.rediceLoss();
+                update();
+            }
+        }        
 
         private void clearBut_Click(object sender, EventArgs e)
         {
@@ -209,6 +195,7 @@ namespace OWTrack
                 else tr.newSR = sr;
             }
             update();
-        }       
+        }
+        #endregion
     }
 }
