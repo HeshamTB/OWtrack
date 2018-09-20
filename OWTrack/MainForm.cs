@@ -17,7 +17,7 @@ namespace OWTrack
 
         public MainForm()
         {
-            InitializeComponent();          
+            InitializeComponent();
             loadSave();
             checkStatus();
             update();
@@ -47,80 +47,59 @@ namespace OWTrack
         private void loadSave()
         {
             Directory.CreateDirectory("saves");
-            if (saveExist())
+            if (saveManeger.saveExist())
             {
-                tr.wins = savedTracker().wins;
-                tr.losses = savedTracker().losses;
-                tr.newSR = savedTracker().newSR;
-                tr.startSR = savedTracker().startSR;
-                tr.gamePath = savedTracker().gamePath;
-                update();
-            }            
-        }       
-
-        private bool saveExist()
-        {
-            try
-            {
-                if (File.Exists(savesPath))
-                {
+                try
+                {                   
                     using (StreamReader st = new StreamReader(savesPath))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
                         {
-                            st.Close();
-                            return true;
+                            tr = saveManeger.GetSavedTracker();
+                            st.Close();                            
                         }
                         else
                         {
                             if (!tr.LoacteOW())
-                            {                                
-                                st.Close();
+                            {
                                 tr.gamePath = getGamePath();
                             }
-                            return true;
+                            st.Close();
                         }
-                    }
-                }
-                else
-                {
-                    if (!tr.LoacteOW())
-                    {
-                        tr.gamePath = getGamePath(); 
-                    }
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return false;
-            }            
-        }
 
+                    }
+                }                
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }                
+                update();
+            }
+            else if (!tr.LoacteOW())
+            {
+                tr.gamePath = getGamePath();
+            }
+        }       
+        
         private string getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
-            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
-            //openFileDialog1.CheckFileExists = true;
-            //openFileDialog1.CheckPathExists = true;
-
+            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";           
             DialogResult result = openFileDialog1.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 //tr.gamePath = openFileDialog1.FileName;
+                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest\n" + openFileDialog1.FileName );
                 return openFileDialog1.FileName;
             }
             else 
             {
+                update();
                 return null;
-                //Close();
-            }
-            //Show();
-            //update();
+            }            
         }
 
         private Tracker savedTracker()

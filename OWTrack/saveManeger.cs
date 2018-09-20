@@ -10,11 +10,13 @@ namespace OWTrack
 {
     class saveManeger
     {
+        private static string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
+
         public static Tracker GetSavedTracker()
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
             }
             catch (Exception e)
             {
@@ -48,45 +50,23 @@ namespace OWTrack
             }
         }
 
-        //private bool saveExist()
-        //{
-        //    try
-        //    {
-        //        if (File.Exists(Directory.GetCurrentDirectory() + "/data.json"))
-        //        {
-        //            using (StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "/data.json"))
-        //            {
-        //                string line = st.ReadLine();
-        //                if (line.Contains("Overwatch.exe"))
-        //                {
-        //                    st.Close();
-        //                    return true;
-        //                }
-        //                else
-        //                {
-        //                    if (!tr.LoacteOW())
-        //                    {
-        //                        st.Close();
-        //                        getGamePath();
-        //                    }
-        //                    return true;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (!tr.LoacteOW())
-        //            {
-        //                getGamePath();
-        //            }
-        //            return false;
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.Message);
-        //        return false;
-        //    }
-        //}
+        public static bool saveExist()
+        {
+            try
+            {
+                if (File.Exists(savesPath))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
