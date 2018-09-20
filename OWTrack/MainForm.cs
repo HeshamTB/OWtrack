@@ -77,7 +77,7 @@ namespace OWTrack
                             if (!tr.LoacteOW())
                             {                                
                                 st.Close();
-                                getGamePath();
+                                tr.gamePath = getGamePath();
                             }
                             return true;
                         }
@@ -136,6 +136,21 @@ namespace OWTrack
             }
         }
 
+        private void update()
+        {
+            Wins.Text = tr.GetWins().ToString();
+            Losses.Text = tr.GetLosses().ToString();
+            if (tr.newSR == 0)
+            {
+                if (tr.srDiff() < 1) { srLabel.Text = tr.startSR.ToString() + " - 0"; }
+                else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            }
+            else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
+            srTextBox.Text = null;
+            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
+        }
+
+        #region Events
         private void timer1_Tick(object sender, EventArgs e) => checkStatus();
 
         private void WinBtn_Click(object sender, EventArgs e)
@@ -160,21 +175,7 @@ namespace OWTrack
         {
             tr.rediceLoss();
             update();
-        }
-
-        private void update()
-        {
-            Wins.Text = tr.GetWins().ToString();
-            Losses.Text = tr.GetLosses().ToString();
-            if (tr.newSR == 0)
-            {
-                if (tr.srDiff() < 1) { srLabel.Text = tr.startSR.ToString() + " - 0"; }
-                else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
-            }
-            else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
-            srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
-        }
+        }        
 
         private void clearBut_Click(object sender, EventArgs e)
         {
@@ -209,6 +210,7 @@ namespace OWTrack
                 else tr.newSR = sr;
             }
             update();
-        }       
+        }
+        #endregion
     }
 }
