@@ -146,14 +146,20 @@ namespace OWTrack
 
         private void reduceWinBut_Click(object sender, EventArgs e)
         {
-            tr.reduceWin();
-            update();
+            if (tr.wins > 0)
+            {
+                tr.reduceWin();
+                update();
+            }
         }
 
         private void reduceLossBut_Click(object sender, EventArgs e)
         {
-            tr.rediceLoss();
-            update();
+            if (tr.losses > 0)
+            {
+                tr.rediceLoss();
+                update();
+            }
         }        
 
         private void clearBut_Click(object sender, EventArgs e)
