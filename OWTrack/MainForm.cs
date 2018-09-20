@@ -87,7 +87,7 @@ namespace OWTrack
                 {
                     if (!tr.LoacteOW())
                     {
-                        getGamePath(); 
+                        tr.gamePath = getGamePath(); 
                     }
                     return false;
                 }
@@ -99,26 +99,28 @@ namespace OWTrack
             }            
         }
 
-        private void getGamePath()
+        private string getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
             openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
-            openFileDialog1.CheckFileExists = true;
-            openFileDialog1.CheckPathExists = true;
+            //openFileDialog1.CheckFileExists = true;
+            //openFileDialog1.CheckPathExists = true;
 
             DialogResult result = openFileDialog1.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                tr.gamePath = openFileDialog1.FileName;
+                //tr.gamePath = openFileDialog1.FileName;
+                return openFileDialog1.FileName;
             }
-            else if (result == DialogResult.Cancel)
+            else 
             {
-                Close();
+                return null;
+                //Close();
             }
-            FindForm();
-            update();
+            //Show();
+            //update();
         }
 
         private Tracker savedTracker()
@@ -133,19 +135,16 @@ namespace OWTrack
                 return null;                
             }
         }
-        
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            checkStatus();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e) => checkStatus();
+
+        private void WinBtn_Click(object sender, EventArgs e)
         {
             tr.addWin();
             update();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void LossBtn_Click(object sender, EventArgs e)
         {
             tr.addLoss();
             update();
