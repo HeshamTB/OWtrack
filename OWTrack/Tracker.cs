@@ -53,7 +53,7 @@ namespace OWTrack
             }
             catch (Exception)
             {
-                Exception ex = new Exception("Error in tracking Overwatch.exe");
+                Exception ex = new Exception("Error");
                 throw ex;
             }
         }
