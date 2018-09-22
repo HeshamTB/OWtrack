@@ -26,27 +26,38 @@ namespace OWTrack
         }
                 
         private void checkStatus()
-        {                                   
+        {                                              
+            Time.Text = DateTime.Now.ToString("h:mm tt");
             try
             {
-                Time.Text = DateTime.Now.ToString("h:mm tt");
-                status.Text = NOT_RUNNING;
-                status.ForeColor = Color.Red;
                 if (tr.owRunning())
                 {
                     status.Text = IS_RUNNING;
                     status.ForeColor = Color.FromArgb(0, 192, 0);
-                }                
+                }
+                else
+                {
+                    status.Text = NOT_RUNNING;
+                    status.ForeColor = Color.Black;
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);                
+                status.Text = e.Message;
+                status.ForeColor = Color.Red;
             }
         }
 
         private void loadSave()
         {
-            Directory.CreateDirectory("saves");
+            try
+            {
+                Directory.CreateDirectory("saves");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Can not create save directory.\n" + e.Message);
+            }
             if (saveManeger.saveExist())
             {
                 try
@@ -92,7 +103,7 @@ namespace OWTrack
             if (result == DialogResult.OK)
             {
                 //tr.gamePath = openFileDialog1.FileName;
-                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest\n" + openFileDialog1.FileName );
+                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
                 return openFileDialog1.FileName;
             }
             else 
