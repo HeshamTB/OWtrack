@@ -32,6 +32,10 @@ namespace OWTrack
     {
         private static string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
 
+        /// <summary>
+        /// Deserialize saved tracker instance.
+        /// </summary>
+        /// <returns></returns>
         public static Tracker GetSavedTracker()
         {
             try
@@ -44,7 +48,6 @@ namespace OWTrack
             }
         }
         
-        //TODO: use para
         public static Tracker GetSavedTracker(string customPath)
         {
             try
@@ -57,11 +60,16 @@ namespace OWTrack
             }
         }
 
+        /// <summary>
+        ///Saves the Tracker Object. 
+        /// </summary>
+        /// <param name="tracker"></param>
+        /// <returns></returns>
         public static bool SaveJSON(Tracker tracker)
         {
             try
             {
-                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tracker));
+                File.WriteAllText(savesPath, JsonConvert.SerializeObject(tracker));
                 return true;
             }
             catch (Exception)
@@ -70,6 +78,10 @@ namespace OWTrack
             }
         }
 
+        /// <summary>
+        /// Check if a 'data.json' exists in the default location '../saves/data.json'.
+        /// </summary>
+        /// <returns>Boolean Value</returns>
         public static bool saveExist()
         {
             try
