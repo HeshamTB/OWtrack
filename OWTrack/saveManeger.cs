@@ -49,7 +49,7 @@ namespace OWTrack
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Directory.GetCurrentDirectory() + "/data.json"));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(customPath + "/data.json"));
             }
             catch (Exception e)
             {
