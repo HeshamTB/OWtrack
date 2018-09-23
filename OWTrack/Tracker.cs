@@ -29,10 +29,10 @@ namespace OWTrack
 {
     class Tracker
     {
-        public int wins, losses, startSR, newSR = 0;
+        public int wins, losses, startSR, newSR, totalMatches = 0;
         public string gamePath;       
         
-        public void Track() { }
+        public void Track() { }//Deserailize here
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
         public void addWin() { wins++; }
         public void addLoss() { losses++; }
@@ -40,6 +40,7 @@ namespace OWTrack
         public void rediceLoss() { losses--; }
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
+        public int GetTotalMatches() { return wins + losses; }
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
 
