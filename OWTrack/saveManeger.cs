@@ -30,6 +30,11 @@ namespace OWTrack
 {
     class saveManeger
     {
+        public enum Paths 
+        {
+            saves = "/saves/data.json",
+            saveJsonFile = "/data.json",
+        };
         private static string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
 
         public static Tracker GetSavedTracker()
