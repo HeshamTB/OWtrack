@@ -1,9 +1,28 @@
+/*Copyright(c) 2018 Hesham Systems LLC.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.*/
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
-
 
 namespace OWTrack
 {
@@ -12,7 +31,6 @@ namespace OWTrack
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
-        private string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
         private bool SRonce = false;
 
         public MainForm()
@@ -26,32 +44,47 @@ namespace OWTrack
         }
                 
         private void checkStatus()
-        {                                   
+        {                                              
+            Time.Text = DateTime.Now.ToString("h:mm tt");
             try
             {
-                Time.Text = DateTime.Now.ToString("h:mm tt");
-                status.Text = NOT_RUNNING;
-                status.ForeColor = Color.Red;
                 if (tr.owRunning())
                 {
                     status.Text = IS_RUNNING;
                     status.ForeColor = Color.FromArgb(0, 192, 0);
-                }                
+                }
+                else
+                {
+                    if (tr.TrackOW)
+                    {
+                        status.Text = NOT_RUNNING;
+                        status.ForeColor = Color.Black;
+                    }
+                    else status.Text = "";
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);                
+                status.Text = e.Message;
+                status.ForeColor = Color.Red;
             }
         }
 
         private void loadSave()
         {
-            Directory.CreateDirectory("saves");
+            try
+            {
+                Directory.CreateDirectory("saves");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Can not create save directory.\n" + e.Message);
+            }
             if (saveManeger.saveExist())
             {
                 try
                 {                   
-                    using (StreamReader st = new StreamReader(savesPath))
+                    using (StreamReader st = new StreamReader(Paths.SAVES))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
@@ -74,14 +107,16 @@ namespace OWTrack
                 {
                     MessageBox.Show(e.Message);
                 }                
-                update();
             }
             else if (!tr.LoacteOW())
             {
                 tr.gamePath = getGamePath();
             }
-        }       
-        
+            ExeTrackCheckBx.Checked = tr.TrackOW;
+            SRCheckBx.Checked = tr.TrackSR;
+            update();
+        }
+
         private string getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
@@ -91,28 +126,25 @@ namespace OWTrack
 
             if (result == DialogResult.OK)
             {
-                //tr.gamePath = openFileDialog1.FileName;
-                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest\n" + openFileDialog1.FileName );
-                return openFileDialog1.FileName;
+                MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
+                return openFileDialog1.FileName;               
             }
             else 
             {
-                update();
                 return null;
             }            
+        }        
+
+        private void SRSystem(bool state)
+        {
+            srBut.Enabled = state;
+            srTextBox.Enabled = state;
+            tr.TrackSR = state;
         }
 
-        private Tracker savedTracker()
+        private void OWTrackFunc(bool state)
         {
-            try
-            {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return null;                
-            }
+            tr.TrackOW = state;
         }
 
         private void update()
@@ -126,7 +158,7 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
+            saveManeger.SaveJSON(tr);
         }
 
         #region Events
@@ -196,6 +228,27 @@ namespace OWTrack
             }
             update();
         }
+
+        private void SRCheckBx_CheckedChanged(object sender, EventArgs e)
+        {
+            SRSystem(SRCheckBx.Checked);
+            update();
+        }
+
+        private void ExeTrackCheckBx_CheckedChanged(object sender, EventArgs e)
+        {
+            OWTrackFunc(ExeTrackCheckBx.Checked);
+            update();
+        }
+
+        private void ChngOWPathBtn_Click(object sender, EventArgs e)
+        {
+            tr.gamePath = getGamePath();
+            update();
+        }
+
         #endregion
+
+
     }
 }

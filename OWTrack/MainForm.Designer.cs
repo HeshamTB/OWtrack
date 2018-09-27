@@ -48,13 +48,19 @@
             this.srBut = new System.Windows.Forms.Button();
             this.srLabel = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
+            this.SRInfoLabel = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.SettingsGroup = new System.Windows.Forms.GroupBox();
+            this.ChngOWPathBtn = new System.Windows.Forms.Button();
+            this.ExeTrackCheckBx = new System.Windows.Forms.CheckBox();
+            this.SRCheckBx = new System.Windows.Forms.CheckBox();
+            this.SettingsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 36);
+            this.label1.Location = new System.Drawing.Point(17, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
@@ -79,7 +85,7 @@
             // Time
             // 
             this.Time.AutoSize = true;
-            this.Time.Location = new System.Drawing.Point(15, 13);
+            this.Time.Location = new System.Drawing.Point(20, 13);
             this.Time.Name = "Time";
             this.Time.Size = new System.Drawing.Size(35, 13);
             this.Time.TabIndex = 2;
@@ -88,39 +94,39 @@
             // Wins
             // 
             this.Wins.AutoSize = true;
-            this.Wins.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.Wins.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Wins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Wins.Location = new System.Drawing.Point(107, 78);
+            this.Wins.Location = new System.Drawing.Point(162, 78);
             this.Wins.Name = "Wins";
-            this.Wins.Size = new System.Drawing.Size(40, 42);
+            this.Wins.Size = new System.Drawing.Size(39, 42);
             this.Wins.TabIndex = 3;
             this.Wins.Text = "0";
             // 
             // Losses
             // 
             this.Losses.AutoSize = true;
-            this.Losses.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.Losses.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Losses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Losses.Location = new System.Drawing.Point(176, 78);
+            this.Losses.Location = new System.Drawing.Point(231, 78);
             this.Losses.Name = "Losses";
-            this.Losses.Size = new System.Drawing.Size(40, 42);
+            this.Losses.Size = new System.Drawing.Size(39, 42);
             this.Losses.TabIndex = 4;
             this.Losses.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Miriam Mono CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(151, 75);
+            this.label3.Location = new System.Drawing.Point(206, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 42);
+            this.label3.Size = new System.Drawing.Size(28, 42);
             this.label3.TabIndex = 5;
             this.label3.Text = ":";
             // 
             // WinBut
             // 
-            this.WinBut.Location = new System.Drawing.Point(106, 136);
+            this.WinBut.Location = new System.Drawing.Point(161, 136);
             this.WinBut.Name = "WinBut";
             this.WinBut.Size = new System.Drawing.Size(52, 26);
             this.WinBut.TabIndex = 6;
@@ -130,7 +136,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(164, 136);
+            this.button2.Location = new System.Drawing.Point(219, 136);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(52, 26);
             this.button2.TabIndex = 6;
@@ -143,7 +149,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(142, 76);
+            this.label2.Location = new System.Drawing.Point(197, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 42);
             this.label2.TabIndex = 5;
@@ -161,7 +167,7 @@
             // 
             // reduceLossBut
             // 
-            this.reduceLossBut.Location = new System.Drawing.Point(222, 137);
+            this.reduceLossBut.Location = new System.Drawing.Point(277, 137);
             this.reduceLossBut.Name = "reduceLossBut";
             this.reduceLossBut.Size = new System.Drawing.Size(20, 24);
             this.reduceLossBut.TabIndex = 8;
@@ -171,7 +177,7 @@
             // 
             // reduceWinBut
             // 
-            this.reduceWinBut.Location = new System.Drawing.Point(82, 137);
+            this.reduceWinBut.Location = new System.Drawing.Point(137, 137);
             this.reduceWinBut.Name = "reduceWinBut";
             this.reduceWinBut.Size = new System.Drawing.Size(20, 24);
             this.reduceWinBut.TabIndex = 9;
@@ -181,17 +187,17 @@
             // 
             // clearBut
             // 
-            this.clearBut.Location = new System.Drawing.Point(271, 200);
+            this.clearBut.Location = new System.Drawing.Point(19, 103);
             this.clearBut.Name = "clearBut";
-            this.clearBut.Size = new System.Drawing.Size(49, 25);
+            this.clearBut.Size = new System.Drawing.Size(75, 25);
             this.clearBut.TabIndex = 10;
-            this.clearBut.Text = "clear";
+            this.clearBut.Text = "Clear stats";
             this.clearBut.UseVisualStyleBackColor = true;
             this.clearBut.Click += new System.EventHandler(this.clearBut_Click);
             // 
             // srTextBox
             // 
-            this.srTextBox.Location = new System.Drawing.Point(114, 168);
+            this.srTextBox.Location = new System.Drawing.Point(169, 168);
             this.srTextBox.Name = "srTextBox";
             this.srTextBox.Size = new System.Drawing.Size(100, 20);
             this.srTextBox.TabIndex = 11;
@@ -199,7 +205,7 @@
             // 
             // srBut
             // 
-            this.srBut.Location = new System.Drawing.Point(129, 194);
+            this.srBut.Location = new System.Drawing.Point(184, 194);
             this.srBut.Name = "srBut";
             this.srBut.Size = new System.Drawing.Size(75, 23);
             this.srBut.TabIndex = 12;
@@ -210,11 +216,11 @@
             // srLabel
             // 
             this.srLabel.AutoSize = true;
-            this.srLabel.Font = new System.Drawing.Font("Noto Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.srLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.srLabel.ForeColor = System.Drawing.Color.DarkOrchid;
             this.srLabel.Location = new System.Drawing.Point(189, 36);
             this.srLabel.Name = "srLabel";
-            this.srLabel.Size = new System.Drawing.Size(65, 23);
+            this.srLabel.Size = new System.Drawing.Size(46, 24);
             this.srLabel.TabIndex = 13;
             this.srLabel.Text = "0 - 0";
             // 
@@ -224,28 +230,83 @@
             this.openFileDialog1.InitialDirectory = "C:\\";
             this.openFileDialog1.RestoreDirectory = true;
             // 
-            // label5
+            // SRInfoLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(190, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Start - Gain/Loss";
+            this.SRInfoLabel.AutoSize = true;
+            this.SRInfoLabel.Location = new System.Drawing.Point(180, 13);
+            this.SRInfoLabel.Name = "SRInfoLabel";
+            this.SRInfoLabel.Size = new System.Drawing.Size(87, 13);
+            this.SRInfoLabel.TabIndex = 14;
+            this.SRInfoLabel.Text = "Start - Gain/Loss";
             // 
-            // Form1
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "OWtrack";
+            this.notifyIcon1.Visible = true;
+            // 
+            // SettingsGroup
+            // 
+            this.SettingsGroup.Controls.Add(this.ChngOWPathBtn);
+            this.SettingsGroup.Controls.Add(this.ExeTrackCheckBx);
+            this.SettingsGroup.Controls.Add(this.SRCheckBx);
+            this.SettingsGroup.Controls.Add(this.clearBut);
+            this.SettingsGroup.Location = new System.Drawing.Point(12, 62);
+            this.SettingsGroup.Name = "SettingsGroup";
+            this.SettingsGroup.Size = new System.Drawing.Size(116, 143);
+            this.SettingsGroup.TabIndex = 15;
+            this.SettingsGroup.TabStop = false;
+            this.SettingsGroup.Text = "Settings";
+            // 
+            // ChngOWPathBtn
+            // 
+            this.ChngOWPathBtn.Location = new System.Drawing.Point(19, 74);
+            this.ChngOWPathBtn.Name = "ChngOWPathBtn";
+            this.ChngOWPathBtn.Size = new System.Drawing.Size(75, 23);
+            this.ChngOWPathBtn.TabIndex = 1;
+            this.ChngOWPathBtn.Text = "OW Path";
+            this.ChngOWPathBtn.UseVisualStyleBackColor = true;
+            this.ChngOWPathBtn.Click += new System.EventHandler(this.ChngOWPathBtn_Click);
+            // 
+            // ExeTrackCheckBx
+            // 
+            this.ExeTrackCheckBx.AutoSize = true;
+            this.ExeTrackCheckBx.Checked = true;
+            this.ExeTrackCheckBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ExeTrackCheckBx.Location = new System.Drawing.Point(11, 44);
+            this.ExeTrackCheckBx.Name = "ExeTrackCheckBx";
+            this.ExeTrackCheckBx.Size = new System.Drawing.Size(90, 17);
+            this.ExeTrackCheckBx.TabIndex = 0;
+            this.ExeTrackCheckBx.Text = "OW Tracking";
+            this.ExeTrackCheckBx.UseVisualStyleBackColor = true;
+            this.ExeTrackCheckBx.CheckedChanged += new System.EventHandler(this.ExeTrackCheckBx_CheckedChanged);
+            // 
+            // SRCheckBx
+            // 
+            this.SRCheckBx.AutoSize = true;
+            this.SRCheckBx.Checked = true;
+            this.SRCheckBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SRCheckBx.Location = new System.Drawing.Point(11, 19);
+            this.SRCheckBx.Name = "SRCheckBx";
+            this.SRCheckBx.Size = new System.Drawing.Size(86, 17);
+            this.SRCheckBx.TabIndex = 0;
+            this.SRCheckBx.Text = "SR Tracking";
+            this.SRCheckBx.UseVisualStyleBackColor = true;
+            this.SRCheckBx.CheckedChanged += new System.EventHandler(this.SRCheckBx_CheckedChanged);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 237);
-            this.Controls.Add(this.label5);
+            this.ClientSize = new System.Drawing.Size(342, 237);
+            this.Controls.Add(this.SettingsGroup);
+            this.Controls.Add(this.SRInfoLabel);
             this.Controls.Add(this.srLabel);
             this.Controls.Add(this.srBut);
             this.Controls.Add(this.srTextBox);
             this.Controls.Add(this.Time);
             this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.clearBut);
             this.Controls.Add(this.reduceWinBut);
             this.Controls.Add(this.reduceLossBut);
             this.Controls.Add(this.label4);
@@ -258,9 +319,11 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OWTrack";
+            this.SettingsGroup.ResumeLayout(false);
+            this.SettingsGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -286,7 +349,12 @@
         private System.Windows.Forms.Button srBut;
         private System.Windows.Forms.Label srLabel;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label SRInfoLabel;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.GroupBox SettingsGroup;
+        private System.Windows.Forms.CheckBox ExeTrackCheckBx;
+        private System.Windows.Forms.CheckBox SRCheckBx;
+        private System.Windows.Forms.Button ChngOWPathBtn;
     }
 }
 

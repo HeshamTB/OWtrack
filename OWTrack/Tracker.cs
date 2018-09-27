@@ -1,4 +1,24 @@
-﻿using System;
+﻿/*Copyright(c) 2018 Hesham Systems LLC.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.*/
+
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
@@ -9,33 +29,40 @@ namespace OWTrack
 {
     class Tracker
     {
-        public int wins, losses, startSR, newSR = 0;
+        public int wins, losses, startSR, newSR, totalMatches = 0;
         public string gamePath;       
         
-        public void Track() { }
+        public void Track() { }//Deserailize here
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
-        public void addWin() { wins++; }
-        public void addLoss() { losses++; }
-        public void reduceWin() { wins--; }
-        public void rediceLoss() { losses--; }
+        public void addWin() => wins++;
+        public void addLoss() => losses++;
+        public void reduceWin() => wins--;
+        public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
+        public int GetTotalMatches() { return wins + losses; }
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
+        public bool TrackOW = true;
+        public bool TrackSR = true;
 
         public bool owRunning()
         {
-            try
+            if (TrackOW)
             {
-                bool isRunning = Process.GetProcessesByName("Overwatch")
-                                .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
-                return isRunning;
+                try
+                {
+                    bool isRunning = Process.GetProcessesByName("Overwatch")
+                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
+                    return isRunning;
+                }
+                catch (Exception)
+                {
+                    Exception ex = new Exception("Error");
+                    throw ex;
+                }
             }
-            catch (Exception)
-            {
-                Exception ex = new Exception("Error in tracking Overwatch.exe");
-                throw ex;
-            }
+            else return false;
         }
       
         public bool LoacteOW() 
