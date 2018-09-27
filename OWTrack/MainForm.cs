@@ -24,7 +24,6 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 
-
 namespace OWTrack
 {
     public partial class MainForm : Form
@@ -56,8 +55,12 @@ namespace OWTrack
                 }
                 else
                 {
-                    status.Text = NOT_RUNNING;
-                    status.ForeColor = Color.Black;
+                    if (tr.TrackOW)
+                    {
+                        status.Text = NOT_RUNNING;
+                        status.ForeColor = Color.Black;
+                    }
+                    else status.Text = "";
                 }
             }
             catch (Exception e)
@@ -144,6 +147,17 @@ namespace OWTrack
             }
         }
 
+        private void SRSystem(bool state)
+        {
+            srBut.Enabled = state;
+            srTextBox.Enabled = state;
+        }
+
+        private void OWTrackFunc(bool state)
+        {
+            tr.TrackOW = state;
+        }
+
         private void update()
         {
             Wins.Text = tr.GetWins().ToString();
@@ -225,6 +239,24 @@ namespace OWTrack
             }
             update();
         }
+
+        private void SRCheckBx_CheckedChanged(object sender, EventArgs e)
+        {
+            SRSystem(SRCheckBx.Checked);              
+        }
+
+        private void ExeTrackCheckBx_CheckedChanged(object sender, EventArgs e)
+        {
+            OWTrackFunc(ExeTrackCheckBx.Checked);
+        }
+
+        private void ChngOWPathBtn_Click(object sender, EventArgs e)
+        {
+            tr.gamePath = getGamePath();
+        }
+
         #endregion
+
+
     }
 }
