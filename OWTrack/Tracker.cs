@@ -43,20 +43,25 @@ namespace OWTrack
         public int GetTotalMatches() { return wins + losses; }
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
+        public bool TrackOW = true;
 
         public bool owRunning()
         {
-            try
+            if (TrackOW)
             {
-                bool isRunning = Process.GetProcessesByName("Overwatch")
-                                .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
-                return isRunning;
+                try
+                {
+                    bool isRunning = Process.GetProcessesByName("Overwatch")
+                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
+                    return isRunning;
+                }
+                catch (Exception)
+                {
+                    Exception ex = new Exception("Error");
+                    throw ex;
+                }
             }
-            catch (Exception)
-            {
-                Exception ex = new Exception("Error");
-                throw ex;
-            }
+            else return false;
         }
       
         public bool LoacteOW() 

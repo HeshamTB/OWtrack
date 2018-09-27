@@ -48,12 +48,12 @@
             this.srBut = new System.Windows.Forms.Button();
             this.srLabel = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
+            this.SRInfoLabel = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.SettingsGroup = new System.Windows.Forms.GroupBox();
-            this.SRCheckBx = new System.Windows.Forms.CheckBox();
-            this.ExeTrackCheckBx = new System.Windows.Forms.CheckBox();
             this.ChngOWPathBtn = new System.Windows.Forms.Button();
+            this.ExeTrackCheckBx = new System.Windows.Forms.CheckBox();
+            this.SRCheckBx = new System.Windows.Forms.CheckBox();
             this.SettingsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -230,14 +230,14 @@
             this.openFileDialog1.InitialDirectory = "C:\\";
             this.openFileDialog1.RestoreDirectory = true;
             // 
-            // label5
+            // SRInfoLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(180, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Start - Gain/Loss";
+            this.SRInfoLabel.AutoSize = true;
+            this.SRInfoLabel.Location = new System.Drawing.Point(180, 13);
+            this.SRInfoLabel.Name = "SRInfoLabel";
+            this.SRInfoLabel.Size = new System.Drawing.Size(87, 13);
+            this.SRInfoLabel.TabIndex = 14;
+            this.SRInfoLabel.Text = "Start - Gain/Loss";
             // 
             // notifyIcon1
             // 
@@ -258,26 +258,6 @@
             this.SettingsGroup.TabStop = false;
             this.SettingsGroup.Text = "Settings";
             // 
-            // SRCheckBx
-            // 
-            this.SRCheckBx.AutoSize = true;
-            this.SRCheckBx.Location = new System.Drawing.Point(11, 19);
-            this.SRCheckBx.Name = "SRCheckBx";
-            this.SRCheckBx.Size = new System.Drawing.Size(86, 17);
-            this.SRCheckBx.TabIndex = 0;
-            this.SRCheckBx.Text = "SR Tracking";
-            this.SRCheckBx.UseVisualStyleBackColor = true;
-            // 
-            // ExeTrackCheckBx
-            // 
-            this.ExeTrackCheckBx.AutoSize = true;
-            this.ExeTrackCheckBx.Location = new System.Drawing.Point(11, 44);
-            this.ExeTrackCheckBx.Name = "ExeTrackCheckBx";
-            this.ExeTrackCheckBx.Size = new System.Drawing.Size(90, 17);
-            this.ExeTrackCheckBx.TabIndex = 0;
-            this.ExeTrackCheckBx.Text = "OW Tracking";
-            this.ExeTrackCheckBx.UseVisualStyleBackColor = true;
-            // 
             // ChngOWPathBtn
             // 
             this.ChngOWPathBtn.Location = new System.Drawing.Point(19, 74);
@@ -286,6 +266,33 @@
             this.ChngOWPathBtn.TabIndex = 1;
             this.ChngOWPathBtn.Text = "OW Path";
             this.ChngOWPathBtn.UseVisualStyleBackColor = true;
+            this.ChngOWPathBtn.Click += new System.EventHandler(this.ChngOWPathBtn_Click);
+            // 
+            // ExeTrackCheckBx
+            // 
+            this.ExeTrackCheckBx.AutoSize = true;
+            this.ExeTrackCheckBx.Checked = true;
+            this.ExeTrackCheckBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ExeTrackCheckBx.Location = new System.Drawing.Point(11, 44);
+            this.ExeTrackCheckBx.Name = "ExeTrackCheckBx";
+            this.ExeTrackCheckBx.Size = new System.Drawing.Size(90, 17);
+            this.ExeTrackCheckBx.TabIndex = 0;
+            this.ExeTrackCheckBx.Text = "OW Tracking";
+            this.ExeTrackCheckBx.UseVisualStyleBackColor = true;
+            this.ExeTrackCheckBx.CheckedChanged += new System.EventHandler(this.ExeTrackCheckBx_CheckedChanged);
+            // 
+            // SRCheckBx
+            // 
+            this.SRCheckBx.AutoSize = true;
+            this.SRCheckBx.Checked = true;
+            this.SRCheckBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SRCheckBx.Location = new System.Drawing.Point(11, 19);
+            this.SRCheckBx.Name = "SRCheckBx";
+            this.SRCheckBx.Size = new System.Drawing.Size(86, 17);
+            this.SRCheckBx.TabIndex = 0;
+            this.SRCheckBx.Text = "SR Tracking";
+            this.SRCheckBx.UseVisualStyleBackColor = true;
+            this.SRCheckBx.CheckedChanged += new System.EventHandler(this.SRCheckBx_CheckedChanged);
             // 
             // MainForm
             // 
@@ -293,7 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 237);
             this.Controls.Add(this.SettingsGroup);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.SRInfoLabel);
             this.Controls.Add(this.srLabel);
             this.Controls.Add(this.srBut);
             this.Controls.Add(this.srTextBox);
@@ -342,7 +349,7 @@
         private System.Windows.Forms.Button srBut;
         private System.Windows.Forms.Label srLabel;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label SRInfoLabel;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.GroupBox SettingsGroup;
         private System.Windows.Forms.CheckBox ExeTrackCheckBx;
