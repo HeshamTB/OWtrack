@@ -44,6 +44,7 @@ namespace OWTrack
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
         public bool TrackOW = true;
+        public bool TrackSR = true;
 
         public bool owRunning()
         {

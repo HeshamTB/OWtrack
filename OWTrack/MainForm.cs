@@ -107,14 +107,16 @@ namespace OWTrack
                 {
                     MessageBox.Show(e.Message);
                 }                
-                update();
             }
             else if (!tr.LoacteOW())
             {
                 tr.gamePath = getGamePath();
             }
-        }       
-        
+            ExeTrackCheckBx.Checked = tr.TrackOW;
+            SRCheckBx.Checked = tr.TrackSR;
+            update();
+        }
+
         private string getGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
@@ -129,28 +131,15 @@ namespace OWTrack
             }
             else 
             {
-                update();
                 return null;
             }            
-        }
-
-        private Tracker savedTracker()
-        {
-            try
-            {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.SAVES));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return null;                
-            }
-        }
+        }        
 
         private void SRSystem(bool state)
         {
             srBut.Enabled = state;
             srTextBox.Enabled = state;
+            tr.TrackSR = state;
         }
 
         private void OWTrackFunc(bool state)
@@ -242,17 +231,20 @@ namespace OWTrack
 
         private void SRCheckBx_CheckedChanged(object sender, EventArgs e)
         {
-            SRSystem(SRCheckBx.Checked);              
+            SRSystem(SRCheckBx.Checked);
+            update();
         }
 
         private void ExeTrackCheckBx_CheckedChanged(object sender, EventArgs e)
         {
             OWTrackFunc(ExeTrackCheckBx.Checked);
+            update();
         }
 
         private void ChngOWPathBtn_Click(object sender, EventArgs e)
         {
             tr.gamePath = getGamePath();
+            update();
         }
 
         #endregion
