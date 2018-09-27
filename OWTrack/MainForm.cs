@@ -155,7 +155,7 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tr));
+            saveManeger.SaveJSON(tr);
         }
 
         #region Events
