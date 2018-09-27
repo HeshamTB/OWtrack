@@ -74,7 +74,7 @@ namespace OWTrack
         {
             try
             {
-                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tracker));
+                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker));
                 return true;
             }
             catch (Exception)
