@@ -32,7 +32,6 @@ namespace OWTrack
         Tracker tr = new Tracker();
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
-        private string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
         private bool SRonce = false;
 
         public MainForm()
@@ -82,7 +81,7 @@ namespace OWTrack
             {
                 try
                 {                   
-                    using (StreamReader st = new StreamReader(savesPath))
+                    using (StreamReader st = new StreamReader(Paths.SAVES))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
@@ -122,9 +121,8 @@ namespace OWTrack
 
             if (result == DialogResult.OK)
             {
-                //tr.gamePath = openFileDialog1.FileName;
                 MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
-                return openFileDialog1.FileName;
+                return openFileDialog1.FileName;               
             }
             else 
             {
@@ -137,7 +135,7 @@ namespace OWTrack
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.SAVES));
             }
             catch (Exception e)
             {
@@ -157,7 +155,7 @@ namespace OWTrack
             }
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "/saves/data.json", JsonConvert.SerializeObject(tr));
+            File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tr));
         }
 
         #region Events

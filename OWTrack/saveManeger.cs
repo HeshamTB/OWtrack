@@ -28,20 +28,20 @@ using System.Threading.Tasks;
 
 namespace OWTrack
 {
-    class saveManeger
+    static class Paths
     {
-        public enum Paths 
-        {
-            saves = "/saves/data.json",
-            saveJsonFile = "/data.json",
-        };
-        private static string savesPath = Directory.GetCurrentDirectory() + "/saves/data.json";
+        private static string curDir = Directory.GetCurrentDirectory();
+        public static string SAVES = curDir + "/saves/data.json";
+        public static string JSON = curDir + "/data.json";
+    }
 
+    class saveManeger
+    {        
         public static Tracker GetSavedTracker()
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(savesPath));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.SAVES));
             }
             catch (Exception e)
             {
@@ -54,7 +54,7 @@ namespace OWTrack
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(customPath + "/data.json"));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(customPath));
             }
             catch (Exception e)
             {
@@ -66,7 +66,7 @@ namespace OWTrack
         {
             try
             {
-                File.WriteAllText(Directory.GetCurrentDirectory() + "/data.json", JsonConvert.SerializeObject(tracker));
+                File.WriteAllText(Paths.JSON, JsonConvert.SerializeObject(tracker));
                 return true;
             }
             catch (Exception)
@@ -79,7 +79,7 @@ namespace OWTrack
         {
             try
             {
-                if (File.Exists(savesPath))
+                if (File.Exists(Paths.SAVES))
                 {
                     return true;
                 }
