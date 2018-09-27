@@ -34,10 +34,10 @@ namespace OWTrack
         
         public void Track() { }//Deserailize here
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
-        public void addWin() { wins++; }
-        public void addLoss() { losses++; }
-        public void reduceWin() { wins--; }
-        public void rediceLoss() { losses--; }
+        public void addWin() => wins++;
+        public void addLoss() => losses++;
+        public void reduceWin() => wins--;
+        public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
         public int GetTotalMatches() { return wins + losses; }
