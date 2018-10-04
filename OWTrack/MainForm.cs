@@ -32,6 +32,7 @@ namespace OWTrack
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
         private bool SRonce = false;
+		int dummy = 0;
 
         public MainForm()
         {
