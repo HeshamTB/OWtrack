@@ -28,7 +28,7 @@ namespace OWTrack
 {
     public partial class MainForm : Form
     {
-        Tracker tr = new Tracker();
+        Tracker tr;
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
         private bool SRonce = false;
@@ -36,11 +36,12 @@ namespace OWTrack
         public MainForm()
         {
             InitializeComponent();
+            tr = new Tracker();
             loadSave();
             checkStatus();
             update();
             label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();           
+            Text = "OWTrack " + Program.Version.ToString();
         }
                 
         private void checkStatus()
@@ -127,12 +128,9 @@ namespace OWTrack
             if (result == DialogResult.OK)
             {
                 MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
-                return openFileDialog1.FileName;               
+                return openFileDialog1.FileName;
             }
-            else 
-            {
-                return null;
-            }            
+            else { return null; }            
         }        
 
         private void SRSystem(bool state)
@@ -246,9 +244,6 @@ namespace OWTrack
             tr.gamePath = getGamePath();
             update();
         }
-
         #endregion
-
-
     }
 }
