@@ -92,17 +92,16 @@ namespace OWTrack
                         if (line.Contains("Overwatch.exe"))
                         {
                             tr = saveManeger.GetSavedTracker();
-                            st.Close();                            
+                            if (tr.startSR > 0) SRonce = true;                    
                         }
                         else
                         {
                             if (!tr.LoacteOW())
                             {
                                 tr.gamePath = getGamePath();
-                            }
-                            st.Close();
+                            }                           
                         }
-
+                        st.Close();
                     }
                 }                
                 catch (Exception e)
@@ -125,13 +124,12 @@ namespace OWTrack
             openFileDialog1.DefaultExt = "exe";
             openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";           
             DialogResult result = openFileDialog1.ShowDialog();
-
             if (result == DialogResult.OK)
             {
                 MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
                 return openFileDialog1.FileName;
             }
-            else { return null; }            
+            else return null;                      
         }        
 
         private void SRSystem(bool state)
