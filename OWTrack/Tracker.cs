@@ -109,9 +109,7 @@ namespace OWTrack
                     gamePath = paths[0];
                     return true;
                 }
-
-                else return false;
-                
+                else return false;                
             }
             catch (Exception e)
             {
