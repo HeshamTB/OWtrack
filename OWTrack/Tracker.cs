@@ -25,6 +25,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
+
 namespace OWTrack
 {
     class Tracker
@@ -114,7 +115,7 @@ namespace OWTrack
                         }
                     }
                 }
-
+                foreach (var file in paths) { MessageBox.Show(file); }
                 if (paths.Count > 1)
                 {
                     //TODO: ask about correct path
