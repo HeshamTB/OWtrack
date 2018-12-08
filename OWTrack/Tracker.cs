@@ -1,4 +1,4 @@
-﻿/*Copyright(c) 2018 Hesham Systems LLC.
+/*Copyright(c) 2018 Hesham Systems LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,15 @@ namespace OWTrack
         public int srDiff() { return newSR - startSR; }
         public bool TrackOW = true;
         public bool TrackSR = true;
+
+        struct ProgramFiles
+        {
+            public static readonly string C = "C:\\Program Files";
+            public static readonly string D = "D:\\Program Files";
+            public static readonly string E = "E:\\Program Files";
+            public static readonly string F = "F:\\Program Files";
+            public static readonly string G = "G:\\Program Files";
+        }
 
         public bool owRunning()
         {
@@ -122,5 +131,11 @@ namespace OWTrack
         {
            return Directory.Exists(drive+":\\Program Files");
         }
+    }
+
+    struct Settings
+    {
+        bool TrackSR, TrackOW;
+        string OWpath;
     }
 }
