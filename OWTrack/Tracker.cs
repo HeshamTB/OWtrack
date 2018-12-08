@@ -1,4 +1,4 @@
-/*Copyright(c) 2018 Hesham Systems LLC.
+﻿/*Copyright(c) 2018 Hesham Systems LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,33 +78,41 @@ namespace OWTrack
         {
             try 
             {
+                DriveInfo[] Drives = DriveInfo.GetDrives();//Make abstraction, all drives.
                 List<string> paths = new List<string>();
                 string[] filesC = null;
                 string[] filesD = null;
-
-                if (ProgramFilesExist('c')) { filesC = Directory.GetFiles("C:\\Program Files", "Overwatch.exe", SearchOption.AllDirectories); }
-                if (ProgramFilesExist('d')) { filesD = Directory.GetFiles("D:\\Program Files", "Overwatch.exe", SearchOption.AllDirectories); }
-
-                if (filesC != null)
+               
+                if (ProgramFilesExist('c'))
                 {
-                    for (int i = 0; i < filesC.Length; i++)
+                    foreach ( string file in Directory.GetFiles(ProgramFiles.C, "Overwatch.exe", SearchOption.AllDirectories))
                     {
-                        if (filesC[i].Contains("Overwatch.exe"))
+                        if (file.Contains("Overwatch.exe"))
                         {
-                            paths.Add(filesC[i]);
+                            paths.Add(file);
+                        }
+                    }
+                }
+                if (ProgramFilesExist('d'))
+                {
+                    foreach (string file in Directory.GetFiles(ProgramFiles.D, "Overwatch.exe", SearchOption.AllDirectories))
+                    {
+                        if (file.Contains("Overwatch.exe"))
+                        {
+                            paths.Add(file);
                         }
                     }
                 }
 
-                if (filesD != null)
+                if (ProgramFilesExist('g'))
                 {
-                    for (int i = 0; i < filesD.Length - 1; i++)
+                    foreach (string file in Directory.GetFiles(ProgramFiles.G, "Overwatch.exe", SearchOption.AllDirectories))
                     {
-                        if (filesD[i].Contains("Overwatch.exe"))
+                        if (file.Contains("Overwatch.exe"))
                         {
-                            paths.Add(filesD[i]);
+                            paths.Add(file);
                         }
-                    } 
+                    }
                 }
 
                 if (paths.Count > 1)
