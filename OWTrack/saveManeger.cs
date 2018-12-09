@@ -74,7 +74,9 @@ namespace OWTrack
         {
             try
             {
-                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker));
+                JsonConvert json = new JsonConvert();//Not tested
+                json.Formatting = Formatting.Indented;
+                File.WriteAllText(Paths.SAVES, json.SerializeObject(tracker));//check if (Indented) Parameter exists
                 return true;
             }
             catch (Exception)
