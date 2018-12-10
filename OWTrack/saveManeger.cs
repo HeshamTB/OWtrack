@@ -73,8 +73,8 @@ namespace OWTrack
         public static bool SaveJSON(Tracker tracker)
         {
             try
-            {
-                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker));
+            {            
+                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker, Formatting.Indented));
                 return true;
             }
             catch (Exception)
