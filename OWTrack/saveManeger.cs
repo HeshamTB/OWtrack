@@ -28,11 +28,14 @@ using System.Threading.Tasks;
 
 namespace OWTrack
 {
-    static class Paths
+     public static class Paths
     {
         private static string curDir = Directory.GetCurrentDirectory();
-        public static string SAVES = curDir + "/saves/data.json";
-        public static string JSON = curDir + "/data.json";
+        private static string SAVES = curDir + "/saves/data.json";
+        private static string JSON = curDir + "/data.json";
+        public static string GetJSON() { return JSON; }
+        public static string GetSaves() { return SAVES; }
+        public static string GetCurrentDir() { return curDir; }
     }
 
     class saveManeger
@@ -45,7 +48,7 @@ namespace OWTrack
         {
             try
             {
-                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.SAVES));
+                return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.GetSaves()));
             }
             catch (Exception e)
             {
@@ -74,7 +77,7 @@ namespace OWTrack
         {
             try
             {
-                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker));
+                File.WriteAllText(Paths.GetSaves(), JsonConvert.SerializeObject(tracker));
                 return true;
             }
             catch (Exception)
@@ -91,7 +94,7 @@ namespace OWTrack
         {
             try
             {
-                if (File.Exists(Paths.SAVES))
+                if (File.Exists(Paths.GetSaves()))
                 {
                     return true;
                 }

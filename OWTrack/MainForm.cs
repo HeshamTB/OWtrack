@@ -86,7 +86,7 @@ namespace OWTrack
             {
                 try
                 {                   
-                    using (StreamReader st = new StreamReader(Paths.SAVES))
+                    using (StreamReader st = new StreamReader(Paths.GetSaves()))
                     {
                         string line = st.ReadLine();
                         if (line.Contains("Overwatch.exe"))
@@ -98,6 +98,7 @@ namespace OWTrack
                         {
                             if (!tr.LoacteOW())
                             {
+                                MessageBox.Show(tr.gamePath);
                                 tr.gamePath = getGamePath();
                             }                           
                         }
