@@ -73,11 +73,8 @@ namespace OWTrack
         public static bool SaveJSON(Tracker tracker)
         {
             try
-            {
-                //https://stackoverflow.com/questions/7947005/how-to-turn-on-indentation-when-writing-json-using-json-net
-                JsonConvert json = new JsonConvert();//Not tested
-                json.Formatting = Formatting.Indented;
-                File.WriteAllText(Paths.SAVES, json.SerializeObject(tracker));//check if (Indented) Parameter exists
+            {            
+                File.WriteAllText(Paths.SAVES, JsonConvert.SerializeObject(tracker, Formatting.Indented));
                 return true;
             }
             catch (Exception)
