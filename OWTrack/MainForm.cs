@@ -98,6 +98,7 @@ namespace OWTrack
                         {
                             if (!tr.LoacteOW())
                             {
+                                MessageBox.Show(tr.gamePath);
                                 tr.gamePath = getGamePath();
                             }                           
                         }

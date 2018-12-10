@@ -53,7 +53,6 @@ namespace OWTrack
             public static readonly string D = "D:\\Program Files";
             public static readonly string E = "E:\\Program Files";
             public static readonly string F = "F:\\Program Files";
-            public static readonly string G = "G:\\Program Files";
         }
 
         public bool owRunning()
@@ -79,43 +78,16 @@ namespace OWTrack
         {
             try 
             {
-                DriveInfo[] Drives = DriveInfo.GetDrives();//Make abstraction, all drives.
+                DriveInfo[] driveInfo = DriveInfo.GetDrives();
                 List<string> paths = new List<string>();
-                string[] filesC = null;
-                string[] filesD = null;
-               
-                if (ProgramFilesExist('c'))
+                //Searches all drives (too long)
+                foreach (var drive in driveInfo)
                 {
-                    foreach ( string file in Directory.GetFiles(ProgramFiles.C, "Overwatch.exe", SearchOption.AllDirectories))
-                    {
-                        if (file.Contains("Overwatch.exe"))
-                        {
-                            paths.Add(file);
-                        }
-                    }
+                    //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
                 }
-                if (ProgramFilesExist('d'))
-                {
-                    foreach (string file in Directory.GetFiles(ProgramFiles.D, "Overwatch.exe", SearchOption.AllDirectories))
-                    {
-                        if (file.Contains("Overwatch.exe"))
-                        {
-                            paths.Add(file);
-                        }
-                    }
-                }
+                paths.AddRange(GetFiles(ProgramFiles.C, "Overwatch.exe"));
+                paths.AddRange(GetFiles(ProgramFiles.D, "Overwatch.exe"));
 
-                if (ProgramFilesExist('g'))
-                {
-                    foreach (string file in Directory.GetFiles(ProgramFiles.G, "Overwatch.exe", SearchOption.AllDirectories))
-                    {
-                        if (file.Contains("Overwatch.exe"))
-                        {
-                            paths.Add(file);
-                        }
-                    }
-                }
-                foreach (var file in paths) { MessageBox.Show(file); }
                 if (paths.Count > 1)
                 {
                     //TODO: ask about correct path
@@ -140,7 +112,32 @@ namespace OWTrack
         {
            return Directory.Exists(drive+":\\Program Files");
         }
+
+        public static IEnumerable<string> GetFiles(string root, string searchPattern)
+        {
+            Stack<string> pending = new Stack<string>();
+            pending.Push(root);
+            while (pending.Count != 0)
+            {
+                var path = pending.Pop();
+                string[] next = null;
+                try
+                {
+                    next = Directory.GetFiles(path, searchPattern);
+                }
+                catch { }
+                if (next != null && next.Length != 0)
+                    foreach (var file in next) yield return file;
+                try
+                {
+                    next = Directory.GetDirectories(path);
+                    foreach (var subdir in next) pending.Push(subdir);
+                }
+                catch { }
+            }
+        }
     }
+
 
     struct Settings
     {
