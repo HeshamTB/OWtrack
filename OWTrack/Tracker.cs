@@ -81,10 +81,10 @@ namespace OWTrack
                 DriveInfo[] driveInfo = DriveInfo.GetDrives();
                 List<string> paths = new List<string>();
                 //Searches all drives (too long)
-                foreach (var drive in driveInfo)
-                {
+                //foreach (var drive in driveInfo)
+                //{
                     //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
-                }
+                //}
                 paths.AddRange(GetFiles(ProgramFiles.C, "Overwatch.exe"));
                 paths.AddRange(GetFiles(ProgramFiles.D, "Overwatch.exe"));
 
@@ -94,7 +94,8 @@ namespace OWTrack
                     return true;
                 }
 
-                else if (paths.Count == 1)
+                else if (paths.Count == 1
+                && paths[0].Contains("Overwatch.exe"))
                 {
                     gamePath = paths[0];
                     return true;
