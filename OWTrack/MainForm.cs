@@ -155,7 +155,7 @@ namespace OWTrack
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
             saveManeger.SaveJSON(tr);
-        }
+        }        
 
         #region Events
         private void timer1_Tick(object sender, EventArgs e) => checkStatus();
@@ -242,6 +242,12 @@ namespace OWTrack
             tr.gamePath = getGamePath();
             update();
         }
-        #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Icon = null;
+            notifyIcon1.Dispose();           
+        }
+        #endregion        
     }
 }
