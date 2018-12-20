@@ -97,7 +97,7 @@ namespace OWTrack
                         {
                             if (!tr.LoacteOW())
                             {
-                                tr.gamePath = getGamePath();
+                                tr.gamePath = askForGamePath();
                             }                           
                         }
                         st.Close();
@@ -110,14 +110,14 @@ namespace OWTrack
             }
             else if (!tr.LoacteOW())
             {
-                tr.gamePath = getGamePath();
+                tr.gamePath = askForGamePath();
             }
             ExeTrackCheckBx.Checked = tr.TrackOW;
             SRCheckBx.Checked = tr.TrackSR;
             update();
         }
 
-        private string getGamePath()
+        private string askForGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
@@ -239,7 +239,7 @@ namespace OWTrack
 
         private void ChngOWPathBtn_Click(object sender, EventArgs e)
         {
-            tr.gamePath = getGamePath();
+            tr.gamePath = askForGamePath();
             update();
         }
 
