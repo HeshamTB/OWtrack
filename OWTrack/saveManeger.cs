@@ -51,7 +51,12 @@ namespace OWTrack
                 throw e;
             }
         }
-        
+
+        /// <summary>
+        /// Deserialize saved tracker instance from a Custom path
+        /// </summary>
+        /// <param name="customPath"></param>
+        /// <returns></returns>
         public static Tracker GetSavedTracker(string customPath)
         {
             try
