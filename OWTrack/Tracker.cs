@@ -1,4 +1,4 @@
-﻿/*Copyright(c) 2018 Hesham Systems LLC.
+/*Copyright(c) 2018 Hesham Systems LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,14 +25,12 @@ using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-
 namespace OWTrack
 {
     class Tracker
     {
         public int wins, losses, startSR, newSR, totalMatches = 0;
         public string gamePath;       
-        
         public void Track() { }//Deserailize here
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
         public void addWin() => wins++;
@@ -91,6 +89,7 @@ namespace OWTrack
                 if (paths.Count > 1)
                 {
                     //TODO: ask about correct path
+                    //New Form?? 
                     return true;
                 }
 
@@ -107,12 +106,7 @@ namespace OWTrack
                  MessageBox.Show(e.Message);
                 return false;
             }                        
-        }
-        
-        private bool ProgramFilesExist(char drive)
-        {
-           return Directory.Exists(drive+":\\Program Files");
-        }
+        }                
 
         public static IEnumerable<string> GetFiles(string root, string searchPattern)
         {

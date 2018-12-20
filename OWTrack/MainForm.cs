@@ -21,7 +21,6 @@ SOFTWARE.*/
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using System.IO;
 
 namespace OWTrack
@@ -88,7 +87,7 @@ namespace OWTrack
                 {                   
                     using (StreamReader st = new StreamReader(Paths.GetSaves()))
                     {
-                        string line = st.ReadLine();
+                        string line = st.ReadToEnd();
                         if (line.Contains("Overwatch.exe"))
                         {
                             tr = saveManeger.GetSavedTracker();
@@ -156,7 +155,7 @@ namespace OWTrack
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
             saveManeger.SaveJSON(tr);
-        }
+        }        
 
         #region Events
         private void timer1_Tick(object sender, EventArgs e) => checkStatus();
@@ -243,6 +242,12 @@ namespace OWTrack
             tr.gamePath = getGamePath();
             update();
         }
-        #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Icon = null;
+            notifyIcon1.Dispose();           
+        }
+        #endregion        
     }
 }
