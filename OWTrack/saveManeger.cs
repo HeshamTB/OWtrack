@@ -20,11 +20,7 @@ SOFTWARE.*/
 
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OWTrack
 {
@@ -76,8 +72,8 @@ namespace OWTrack
         public static bool SaveJSON(Tracker tracker)
         {
             try
-            {
-                File.WriteAllText(Paths.GetSaves(), JsonConvert.SerializeObject(tracker));
+            {                       
+                File.WriteAllText(Paths.GetSaves(), JsonConvert.SerializeObject(tracker, Formatting.Indented));
                 return true;
             }
             catch (Exception)
