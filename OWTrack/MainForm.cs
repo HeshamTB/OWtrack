@@ -87,7 +87,7 @@ namespace OWTrack
                 {                   
                     using (StreamReader st = new StreamReader(Paths.GetSaves()))
                     {
-                        string line = st.ReadLine();
+                        string line = st.ReadToEnd();
                         if (line.Contains("Overwatch.exe"))
                         {
                             tr = saveManeger.GetSavedTracker();
