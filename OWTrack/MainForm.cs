@@ -31,7 +31,7 @@ namespace OWTrack
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
         private bool SRonce = false;
-		int dummy = 0;
+        private string Version = Program.Version.ToString();
 
         public MainForm()
         {
@@ -40,8 +40,8 @@ namespace OWTrack
             loadSave();
             checkStatus();
             update();
-            label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();
+            label4.Text = Version;
+            Text = "OWTrack " + Version;
         }
                 
         private void checkStatus()
@@ -71,6 +71,8 @@ namespace OWTrack
             }
         }
 
+        //Move to saveManeger.cs ?
+        //Refactor!!
         private void loadSave()
         {
             try
@@ -90,7 +92,6 @@ namespace OWTrack
                         string line = st.ReadToEnd();
                         if (line.Contains("Overwatch.exe"))
                         {
-                            MessageBox.Show(line);
                             tr = saveManeger.GetSavedTracker();
                             if (tr.startSR > 0) SRonce = true;                    
                         }
@@ -139,10 +140,7 @@ namespace OWTrack
             tr.settings.TrackSR = state;
         }
 
-        private void OWTrackFunc(bool state)
-        {
-            tr.settings.TrackOW = state;
-        }
+        private void OWTrackFunc(bool state) => tr.settings.TrackOW = state;
 
         private void update()
         {
