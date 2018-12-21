@@ -165,7 +165,7 @@ namespace OWTrack
                 ChangeInSR = tr.srDiff(),
                 dateTime = DateTime.Now
             };
-            tr.matches.Add(match);
+            tr.AddMatch(match);
         }
 
         #region Events
