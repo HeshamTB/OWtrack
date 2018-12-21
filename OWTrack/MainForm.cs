@@ -86,24 +86,16 @@ namespace OWTrack
             if (saveManeger.saveExist())
             {
                 try
-                {                   
-                    using (StreamReader st = new StreamReader(Paths.GetSaves()))
+                {
+                    tr = saveManeger.GetSavedTracker();               
+                    if (tr.startSR > 0) SRonce = true;                    
+                    if (tr.settings.GamePath == "" || tr.settings.GamePath == null)
                     {
-                        string line = st.ReadToEnd();
-                        if (line.Contains("Overwatch.exe"))
+                        if (!tr.LoacteOW())
                         {
-                            tr = saveManeger.GetSavedTracker();
-                            if (tr.startSR > 0) SRonce = true;                    
-                        }
-                        else
-                        {
-                            if (!tr.LoacteOW())
-                            {
-                                tr.settings.GamePath = askForGamePath();
-                            }                           
-                        }
-                        st.Close();
-                    }
+                            tr.settings.GamePath = askForGamePath();
+                        }      
+                    }    
                 }                
                 catch (Exception e)
                 {
