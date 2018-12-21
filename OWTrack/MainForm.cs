@@ -34,15 +34,14 @@ namespace OWTrack
         private string Version = Program.Version.ToString();
 
         public MainForm()
-        {
+        {           
             InitializeComponent();
-            tr = new Tracker();
+            tr = new Tracker();                       
             loadSave();
-            tr.StartNewSeission();
             checkStatus();
             update();
             label4.Text = Version;
-            Text = "OWTrack " + Version;
+            Text = "OWTrack " + Version;             
         }
 
         private void checkStatus()
@@ -72,8 +71,7 @@ namespace OWTrack
             }
         }
 
-        //Move to saveManeger.cs ?
-        //Refactor!!
+        //Move to saveManeger.cs ?        
         private void loadSave()
         {
             try
@@ -109,6 +107,7 @@ namespace OWTrack
             }
             ExeTrackCheckBx.Checked = tr.settings.TrackOW;
             SRCheckBx.Checked = tr.settings.TrackSR;
+            tr.StartNewSeission();
         }
 
         private string askForGamePath()
@@ -152,10 +151,10 @@ namespace OWTrack
         {
             Match match = new Match
             {
-                oldSR = tr.startSR,
+                StartSR = tr.startSR,
                 newSR = tr.newSR,
                 ChangeInSR = tr.srDiff(),
-                dateTime = DateTime.Now
+                dateTime = DateTime.Now.Date
             };
             tr.GetCurrentSession().AddMatch(match);
         }
