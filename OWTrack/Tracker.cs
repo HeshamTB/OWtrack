@@ -30,37 +30,63 @@ namespace OWTrack
     class Tracker
     {
         public int wins, losses, startSR, newSR, totalMatches = 0;
-        public string gamePath;       
-        public void Track() { }//Deserailize here
-        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
+        
         public void addWin() => wins++;
         public void addLoss() => losses++;
         public void reduceWin() => wins--;
         public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
-        public int GetTotalMatches() { return wins + losses; }
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }
-        public bool TrackOW = true;
-        public bool TrackSR = true;
-
-        struct ProgramFiles
+        public Settings settings = new Settings();
+        public List<Session> sessions = new List<Session>();
+        public int GetTotalMatches()
         {
-            public static readonly string C = "C:\\Program Files";
-            public static readonly string D = "D:\\Program Files";
-            public static readonly string E = "E:\\Program Files";
-            public static readonly string F = "F:\\Program Files";
+            int number = 0;
+            foreach (var session in sessions)
+            {
+                number += session.TotalMatches;
+            }
+            return number;
+        }
+
+        public int GetCurrentSessionMatches()
+        {
+            return sessions.Last().TotalMatches;
+        }
+
+        public void reset()
+        {
+            wins = 0;
+            losses = 0;
+            startSR = 0;
+            newSR = 0;
+            settings.Reset();
+            sessions.Clear();
+            StartNewSeission();
+        }
+              
+        public void StartNewSeission()
+        {
+            Session ses = new Session(startSR);
+            sessions.Add(ses);
+            //Re do SR input!! 
+        }
+
+        public Session GetCurrentSession()
+        {
+            return sessions.Last();
         }
 
         public bool owRunning()
         {
-            if (TrackOW)
+            if (settings.TrackOW)
             {
                 try
                 {
                     bool isRunning = Process.GetProcessesByName("Overwatch")
-                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
+                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(settings.GamePath)) != default(Process);
                     return isRunning;
                 }
                 catch (Exception)
@@ -71,20 +97,20 @@ namespace OWTrack
             }
             else return false;
         }
-      
-        public bool LoacteOW() 
+
+        public bool LoacteOW()
         {
-            try 
+            try
             {
                 DriveInfo[] driveInfo = DriveInfo.GetDrives();
                 List<string> paths = new List<string>();
                 //Searches all drives (too long)
-                foreach (var drive in driveInfo)
-                {
-                    //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
-                }
-                paths.AddRange(GetFiles(ProgramFiles.C, "Overwatch.exe"));
-                paths.AddRange(GetFiles(ProgramFiles.D, "Overwatch.exe"));
+                //foreach (var drive in driveInfo)
+                //{
+                //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
+                //}
+                paths.AddRange(GetFiles(Paths.ProgramFiles.C, "Overwatch.exe"));
+                paths.AddRange(GetFiles(Paths.ProgramFiles.D, "Overwatch.exe"));
 
                 if (paths.Count > 1)
                 {
@@ -93,19 +119,20 @@ namespace OWTrack
                     return true;
                 }
 
-                else if (paths.Count == 1)
+                else if (paths.Count == 1
+                && paths[0].Contains("Overwatch.exe"))
                 {
-                    gamePath = paths[0];
+                    settings.GamePath = paths[0];
                     return true;
                 }
-                else return false;                
+                else return false;
             }
             catch (Exception e)
             {
-                 MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message);
                 return false;
-            }                        
-        }                
+            }
+        }
 
         public static IEnumerable<string> GetFiles(string root, string searchPattern)
         {
@@ -132,10 +159,64 @@ namespace OWTrack
         }
     }
 
-
-    struct Settings
+    class Settings
     {
-        bool TrackSR, TrackOW;
-        string OWpath;
+        public bool TrackSR, TrackOW = true;
+        public string GamePath = "";
+
+        /// <summary>
+        /// Reset All values to defult  
+        /// </summary>
+        public void Reset()
+        {
+            TrackOW = true;
+            TrackSR = true;
+            GamePath = "";
+        }
+    }
+
+    class Session
+    {
+        public int TotalMatches;
+        public int SkillChange;
+        public int StartSR;
+        public DateTime date;
+        public List<Match> Matches = new List<Match>();       
+
+        /// <summary>
+        /// Start a new session with a starting Skill Rating
+        ///</summary>
+        public Session(int StartSR)
+        {
+            this.StartSR = StartSR;
+            date = DateTime.Now.Date;
+            TotalMatches = 0;
+        }
+
+        public bool IsNewSession()
+        {
+            if (Matches.Count == 0) return true;
+            else return false;
+        }
+
+        public Match GetLastMatch()
+        {
+            return Matches.Last();
+        }
+
+        public void AddMatch(Match match)
+        {
+            this.Matches.Add(match);
+            this.TotalMatches = Matches.Count();
+        }
+    }
+
+    class Match
+    {
+        public Match() { }
+        public DateTime dateTime { get; set; }
+        public int StartSR;
+        public int newSR;
+        public int ChangeInSR;
     }
 }

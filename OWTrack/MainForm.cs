@@ -31,21 +31,21 @@ namespace OWTrack
         private const string IS_RUNNING = "Running";
         private const string NOT_RUNNING = " Not running";
         private bool SRonce = false;
-		int dummy = 0;
+        private string Version = Program.Version.ToString();
 
         public MainForm()
-        {
+        {           
             InitializeComponent();
-            tr = new Tracker();
+            tr = new Tracker();                       
             loadSave();
             checkStatus();
             update();
-            label4.Text = Program.Version.ToString();
-            Text = "OWTrack " + Program.Version.ToString();
+            label4.Text = Version;
+            Text = "OWTrack " + Version;             
         }
-                
+
         private void checkStatus()
-        {                                              
+        {
             Time.Text = DateTime.Now.ToString("h:mm tt");
             try
             {
@@ -56,7 +56,7 @@ namespace OWTrack
                 }
                 else
                 {
-                    if (tr.TrackOW)
+                    if (tr.settings.TrackOW)
                     {
                         status.Text = NOT_RUNNING;
                         status.ForeColor = Color.Black;
@@ -71,6 +71,7 @@ namespace OWTrack
             }
         }
 
+        //Move to saveManeger.cs ?        
         private void loadSave()
         {
             try
@@ -84,64 +85,62 @@ namespace OWTrack
             if (saveManeger.saveExist())
             {
                 try
-                {                   
-                    using (StreamReader st = new StreamReader(Paths.GetSaves()))
+                {
+                    try
                     {
-                        string line = st.ReadLine();
-                        if (line.Contains("Overwatch.exe"))
-                        {
-                            tr = saveManeger.GetSavedTracker();
-                            if (tr.startSR > 0) SRonce = true;                    
-                        }
-                        else
-                        {
-                            if (!tr.LoacteOW())
-                            {
-                                tr.gamePath = getGamePath();
-                            }                           
-                        }
-                        st.Close();
+                        tr = saveManeger.GetSavedTracker();
                     }
-                }                
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Could not load Save.\n" +
+                                        "Starting new save.");
+                        tr = new Tracker();
+                    }
+                    if (tr.startSR > 0) SRonce = true;
+                    if (tr.settings.GamePath == "" || tr.settings.GamePath == null)
+                    {
+                        if (!tr.LoacteOW())
+                        {
+                            tr.settings.GamePath = askForGamePath();
+                        }
+                    }
+                }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
-                }                
+                }
             }
             else if (!tr.LoacteOW())
             {
-                tr.gamePath = getGamePath();
+                tr.settings.GamePath = askForGamePath();
             }
-            ExeTrackCheckBx.Checked = tr.TrackOW;
-            SRCheckBx.Checked = tr.TrackSR;
-            update();
+            ExeTrackCheckBx.Checked = tr.settings.TrackOW;
+            SRCheckBx.Checked = tr.settings.TrackSR;
+            tr.StartNewSeission();
         }
 
-        private string getGamePath()
+        private string askForGamePath()
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
-            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";           
+            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
                 MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
                 return openFileDialog1.FileName;
             }
-            else return null;                      
-        }        
+            else return null;
+        }
 
         private void SRSystem(bool state)
         {
             srBut.Enabled = state;
             srTextBox.Enabled = state;
-            tr.TrackSR = state;
+            tr.settings.TrackSR = state;
         }
 
-        private void OWTrackFunc(bool state)
-        {
-            tr.TrackOW = state;
-        }
+        private void OWTrackFunc(bool state) => tr.settings.TrackOW = state;
 
         private void update()
         {
@@ -155,7 +154,19 @@ namespace OWTrack
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
             saveManeger.SaveJSON(tr);
-        }        
+        }
+
+        private void AddMatch()
+        {
+            Match match = new Match
+            {
+                StartSR = tr.startSR,
+                newSR = tr.newSR,
+                ChangeInSR = tr.srDiff(),
+                dateTime = DateTime.Now.Date
+            };
+            tr.GetCurrentSession().AddMatch(match);
+        }
 
         #region Events
         private void timer1_Tick(object sender, EventArgs e) => checkStatus();
@@ -188,13 +199,13 @@ namespace OWTrack
                 tr.rediceLoss();
                 update();
             }
-        }        
+        }
 
         private void clearBut_Click(object sender, EventArgs e)
         {
             tr.reset();
             update();
-        }       
+        }
 
         private void srBut_Click(object sender, EventArgs e)
         {
@@ -222,6 +233,7 @@ namespace OWTrack
                 }
                 else tr.newSR = sr;
             }
+            AddMatch();
             update();
         }
 
@@ -239,14 +251,14 @@ namespace OWTrack
 
         private void ChngOWPathBtn_Click(object sender, EventArgs e)
         {
-            tr.gamePath = getGamePath();
+            tr.settings.GamePath = askForGamePath();
             update();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             notifyIcon1.Icon = null;
-            notifyIcon1.Dispose();           
+            notifyIcon1.Dispose();
         }
         #endregion        
     }
