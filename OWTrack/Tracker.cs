@@ -41,8 +41,14 @@ namespace OWTrack
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }        
         public Settings settings = new Settings();
-        public List<Match> matches = new List<Match>();       
+        //public List<Match> matches = new List<Match>();
+        public List<Session> sessions = new List<Session>();       
 
+        public void StartNewSeission() 
+        {
+            Session ses = new Session(startSR);
+            //Re do SR input!! 
+        }
         public bool owRunning()
         {
             if (settings.TrackOW)
@@ -147,6 +153,9 @@ namespace OWTrack
         List<Match> Matches = new List<Math>();
         DateTime date;
         
+        /// <summary>
+        /// Start a new session with a starting Skill Rating
+        ///</summary>
         public Session(int StartSR)
         {
             this.StartSR = StartSR;
