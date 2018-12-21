@@ -30,8 +30,6 @@ namespace OWTrack
     class Tracker
     {
         public int wins, losses, startSR, newSR, totalMatches = 0;
-        //public string gamePath;       
-        public void Track() { }//Deserailize here
         public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; settings.Reset(); }
         public void addWin() => wins++;
         public void addLoss() => losses++;
