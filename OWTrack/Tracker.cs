@@ -139,7 +139,38 @@ namespace OWTrack
         }
     }
 
-    public class Match 
+    class Session
+    {
+        public int TotalMatches;
+        public int SkillChange;
+        public int StartSR;
+        List<Match> Matches = new List<Math>();
+        DateTime date;
+        
+        public Session(int StartSR)
+        {
+            this.StartSR = StartSR;
+            date = DateTime.Now.Date;
+        }
+
+        public bool IsNewSession() 
+        {
+            if (Matches.Count == 0) return true;
+            else return false;
+        }
+
+        public Match GetLastMatch()
+        {
+            return Matches.Last();
+        }
+
+        public void AddMatch(Match match)
+        {
+            this.Matches.Add(match);
+        }
+    }
+
+    class Match 
     {
         public Match() { }
         public DateTime dateTime { get; set; }
