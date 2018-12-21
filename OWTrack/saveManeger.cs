@@ -24,7 +24,7 @@ using System.IO;
 
 namespace OWTrack
 {
-     public static class Paths
+    public static class Paths
     {
         private static string curDir = Directory.GetCurrentDirectory();
         private static string SAVES = curDir + "/saves/data.json";
@@ -32,10 +32,19 @@ namespace OWTrack
         public static string GetJSON() { return JSON; }
         public static string GetSaves() { return SAVES; }
         public static string GetCurrentDir() { return curDir; }
+
+        public static class ProgramFiles
+        {
+            public static readonly string C = "C:\\Program Files";
+            public static readonly string D = "D:\\Program Files";
+            public static readonly string E = "E:\\Program Files";
+            public static readonly string F = "F:\\Program Files";
+        }
+
     }
 
     class saveManeger
-    {        
+    {
         /// <summary>
         /// Deserialize saved tracker instance.
         /// </summary>
@@ -77,7 +86,7 @@ namespace OWTrack
         public static bool SaveJSON(Tracker tracker)
         {
             try
-            {                       
+            {
                 File.WriteAllText(Paths.GetSaves(), JsonConvert.SerializeObject(tracker, Formatting.Indented));
                 return true;
             }
