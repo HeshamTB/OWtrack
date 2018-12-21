@@ -44,9 +44,9 @@ namespace OWTrack
             label4.Text = Version;
             Text = "OWTrack " + Version;
         }
-                
+
         private void checkStatus()
-        {                                              
+        {
             Time.Text = DateTime.Now.ToString("h:mm tt");
             try
             {
@@ -88,20 +88,20 @@ namespace OWTrack
             {
                 try
                 {
-                    tr = saveManeger.GetSavedTracker();               
-                    if (tr.startSR > 0) SRonce = true;                    
+                    tr = saveManeger.GetSavedTracker();
+                    if (tr.startSR > 0) SRonce = true;
                     if (tr.settings.GamePath == "" || tr.settings.GamePath == null)
                     {
                         if (!tr.LoacteOW())
                         {
                             tr.settings.GamePath = askForGamePath();
-                        }      
-                    }    
-                }                
+                        }
+                    }
+                }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
-                }                
+                }
             }
             else if (!tr.LoacteOW())
             {
@@ -115,15 +115,15 @@ namespace OWTrack
         {
             openFileDialog1.Title = "Select Overwatch.exe";
             openFileDialog1.DefaultExt = "exe";
-            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";           
+            openFileDialog1.Filter = "exe Files (*.exe)|*.exe|All files (*.*)|*.*";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
                 MessageBox.Show("Saved Overwatch.exe location.\nPress Clear to rest");
                 return openFileDialog1.FileName;
             }
-            else return null;                      
-        }        
+            else return null;
+        }
 
         private void SRSystem(bool state)
         {
@@ -191,13 +191,13 @@ namespace OWTrack
                 tr.rediceLoss();
                 update();
             }
-        }        
+        }
 
         private void clearBut_Click(object sender, EventArgs e)
         {
             tr.reset();
             update();
-        }       
+        }
 
         private void srBut_Click(object sender, EventArgs e)
         {
@@ -250,7 +250,7 @@ namespace OWTrack
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             notifyIcon1.Icon = null;
-            notifyIcon1.Dispose();           
+            notifyIcon1.Dispose();
         }
         #endregion        
     }

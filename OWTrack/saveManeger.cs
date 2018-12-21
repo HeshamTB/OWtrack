@@ -44,7 +44,7 @@ namespace OWTrack
     }
 
     class saveManeger
-    {     
+    {
         /// <summary>
         /// Deserialize saved tracker instance.
         /// </summary>
@@ -86,7 +86,7 @@ namespace OWTrack
         public static bool SaveJSON(Tracker tracker)
         {
             try
-            {                       
+            {
                 File.WriteAllText(Paths.GetSaves(), JsonConvert.SerializeObject(tracker, Formatting.Indented));
                 return true;
             }
