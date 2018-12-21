@@ -170,8 +170,8 @@ namespace OWTrack
         public int TotalMatches;
         public int SkillChange;
         public int StartSR;
-        List<Match> Matches = new List<Match>();
-        DateTime date;
+        public List<Match> Matches = new List<Match>();
+        public DateTime date;
 
         /// <summary>
         /// Start a new session with a starting Skill Rating
