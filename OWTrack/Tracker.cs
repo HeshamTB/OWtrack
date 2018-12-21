@@ -37,7 +37,21 @@ namespace OWTrack
         public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
-        public int GetTotalMatches() { return wins + losses; }
+        public int GetTotalMatches() 
+        { 
+            int number = 0;
+            foreach (var session in sessions)
+            {
+                number += session.TotalMatches;
+            }
+            return number; 
+        }
+
+        public int GetCurrentSessionMatches()
+        {
+            return sessions.Last().TotalMatches;
+        }
+        
         public void setNewSR(int SR) { newSR = SR; }
         public int srDiff() { return newSR - startSR; }        
         public Settings settings = new Settings();
@@ -160,6 +174,7 @@ namespace OWTrack
         {
             this.StartSR = StartSR;
             date = DateTime.Now.Date;
+            TotalMatches = 0;
         }
 
         public bool IsNewSession() 
@@ -176,6 +191,7 @@ namespace OWTrack
         public void AddMatch(Match match)
         {
             this.Matches.Add(match);
+            this.TotalMatches = Matches.Count();
         }
     }
 
