@@ -38,6 +38,7 @@ namespace OWTrack
             InitializeComponent();
             tr = new Tracker();
             loadSave();
+            tr.StartNewSeission();
             checkStatus();
             update();
             label4.Text = Version;
@@ -108,7 +109,6 @@ namespace OWTrack
             }
             ExeTrackCheckBx.Checked = tr.settings.TrackOW;
             SRCheckBx.Checked = tr.settings.TrackSR;
-            update();
         }
 
         private string askForGamePath()
@@ -157,7 +157,7 @@ namespace OWTrack
                 ChangeInSR = tr.srDiff(),
                 dateTime = DateTime.Now
             };
-            tr.AddMatch(match);
+            tr.GetCurrentSession().AddMatch(match);
         }
 
         #region Events
