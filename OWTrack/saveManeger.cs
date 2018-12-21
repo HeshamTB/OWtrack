@@ -55,9 +55,10 @@ namespace OWTrack
             {
                 return JsonConvert.DeserializeObject<Tracker>(File.ReadAllText(Paths.GetSaves()));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                Exception ex = new Exception("json");
+                throw ex;
             }
         }
 

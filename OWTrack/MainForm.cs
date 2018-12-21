@@ -86,7 +86,16 @@ namespace OWTrack
             {
                 try
                 {
-                    tr = saveManeger.GetSavedTracker();
+                    try
+                    {
+                        tr = saveManeger.GetSavedTracker();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Could not load Save.\n" +
+                                        "Starting new save.");
+                        tr = new Tracker();
+                    }
                     if (tr.startSR > 0) SRonce = true;
                     if (tr.settings.GamePath == "" || tr.settings.GamePath == null)
                     {
