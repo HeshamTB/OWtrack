@@ -30,13 +30,17 @@ namespace OWTrack
     class Tracker
     {
         public int wins, losses, startSR, newSR, totalMatches = 0;
-        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; settings.Reset(); }
+        
         public void addWin() => wins++;
         public void addLoss() => losses++;
         public void reduceWin() => wins--;
         public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
+        public void setNewSR(int SR) { newSR = SR; }
+        public int srDiff() { return newSR - startSR; }
+        public Settings settings = new Settings();
+        public List<Session> sessions = new List<Session>();
         public int GetTotalMatches()
         {
             int number = 0;
@@ -52,12 +56,17 @@ namespace OWTrack
             return sessions.Last().TotalMatches;
         }
 
-        public void setNewSR(int SR) { newSR = SR; }
-        public int srDiff() { return newSR - startSR; }
-        public Settings settings = new Settings();
-        //public List<Match> matches = new List<Match>();
-        public List<Session> sessions = new List<Session>();
-
+        public void reset()
+        {
+            wins = 0;
+            losses = 0;
+            startSR = 0;
+            newSR = 0;
+            settings.Reset();
+            sessions.Clear();
+            StartNewSeission();
+        }
+              
         public void StartNewSeission()
         {
             Session ses = new Session(startSR);
@@ -69,6 +78,7 @@ namespace OWTrack
         {
             return sessions.Last();
         }
+
         public bool owRunning()
         {
             if (settings.TrackOW)
@@ -170,8 +180,8 @@ namespace OWTrack
         public int TotalMatches;
         public int SkillChange;
         public int StartSR;
-        public List<Match> Matches = new List<Match>();
         public DateTime date;
+        public List<Match> Matches = new List<Match>();       
 
         /// <summary>
         /// Start a new session with a starting Skill Rating
@@ -205,7 +215,7 @@ namespace OWTrack
     {
         public Match() { }
         public DateTime dateTime { get; set; }
-        public int oldSR;
+        public int StartSR;
         public int newSR;
         public int ChangeInSR;
     }
