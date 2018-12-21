@@ -30,9 +30,9 @@ namespace OWTrack
     class Tracker
     {
         public int wins, losses, startSR, newSR, totalMatches = 0;
-        public string gamePath;       
+        //public string gamePath;       
         public void Track() { }//Deserailize here
-        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; gamePath = null; }
+        public void reset() { wins = 0; losses = 0; startSR = 0; newSR = 0; settings.Reset(); }
         public void addWin() => wins++;
         public void addLoss() => losses++;
         public void reduceWin() => wins--;
@@ -41,26 +41,18 @@ namespace OWTrack
         public int GetLosses() { return losses; }
         public int GetTotalMatches() { return wins + losses; }
         public void setNewSR(int SR) { newSR = SR; }
-        public int srDiff() { return newSR - startSR; }
-        public bool TrackOW = true;
-        public bool TrackSR = true;
-
-        struct ProgramFiles
-        {
-            public static readonly string C = "C:\\Program Files";
-            public static readonly string D = "D:\\Program Files";
-            public static readonly string E = "E:\\Program Files";
-            public static readonly string F = "F:\\Program Files";
-        }
+        public int srDiff() { return newSR - startSR; }        
+        public Settings settings = new Settings();
+        public List<Match> matches = new List<Match>();       
 
         public bool owRunning()
         {
-            if (TrackOW)
+            if (settings.TrackOW)
             {
                 try
                 {
                     bool isRunning = Process.GetProcessesByName("Overwatch")
-                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(gamePath)) != default(Process);
+                                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(settings.GamePath)) != default(Process);
                     return isRunning;
                 }
                 catch (Exception)
@@ -83,8 +75,8 @@ namespace OWTrack
                 //{
                     //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
                 //}
-                paths.AddRange(GetFiles(ProgramFiles.C, "Overwatch.exe"));
-                paths.AddRange(GetFiles(ProgramFiles.D, "Overwatch.exe"));
+                paths.AddRange(GetFiles(Paths.ProgramFiles.C, "Overwatch.exe"));
+                paths.AddRange(GetFiles(Paths.ProgramFiles.D, "Overwatch.exe"));
 
                 if (paths.Count > 1)
                 {
@@ -96,7 +88,7 @@ namespace OWTrack
                 else if (paths.Count == 1
                 && paths[0].Contains("Overwatch.exe"))
                 {
-                    gamePath = paths[0];
+                    settings.GamePath = paths[0];
                     return true;
                 }
                 else return false;                
@@ -133,10 +125,28 @@ namespace OWTrack
         }
     }
 
-
-    struct Settings
+    class Settings
     {
-        bool TrackSR, TrackOW;
-        string OWpath;
+       public bool TrackSR, TrackOW = true;
+       public string GamePath = "";
+
+        /// <summary>
+        /// Reset All values to defult  
+        /// </summary>
+       public void Reset()
+        {
+            TrackOW = true;
+            TrackSR = true;
+            GamePath = "";
+        }
+    }
+
+    public class Match 
+    {
+        public Match() { }
+        public DateTime dateTime { get; set; }
+        public int oldSR;
+        public int newSR;
+        public int ChangeInSR;
     }
 }

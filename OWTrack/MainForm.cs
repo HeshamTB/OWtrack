@@ -56,7 +56,7 @@ namespace OWTrack
                 }
                 else
                 {
-                    if (tr.TrackOW)
+                    if (tr.settings.TrackOW)
                     {
                         status.Text = NOT_RUNNING;
                         status.ForeColor = Color.Black;
@@ -90,6 +90,7 @@ namespace OWTrack
                         string line = st.ReadToEnd();
                         if (line.Contains("Overwatch.exe"))
                         {
+                            MessageBox.Show(line);
                             tr = saveManeger.GetSavedTracker();
                             if (tr.startSR > 0) SRonce = true;                    
                         }
@@ -97,7 +98,7 @@ namespace OWTrack
                         {
                             if (!tr.LoacteOW())
                             {
-                                tr.gamePath = askForGamePath();
+                                tr.settings.GamePath = askForGamePath();
                             }                           
                         }
                         st.Close();
@@ -110,10 +111,10 @@ namespace OWTrack
             }
             else if (!tr.LoacteOW())
             {
-                tr.gamePath = askForGamePath();
+                tr.settings.GamePath = askForGamePath();
             }
-            ExeTrackCheckBx.Checked = tr.TrackOW;
-            SRCheckBx.Checked = tr.TrackSR;
+            ExeTrackCheckBx.Checked = tr.settings.TrackOW;
+            SRCheckBx.Checked = tr.settings.TrackSR;
             update();
         }
 
@@ -135,12 +136,12 @@ namespace OWTrack
         {
             srBut.Enabled = state;
             srTextBox.Enabled = state;
-            tr.TrackSR = state;
+            tr.settings.TrackSR = state;
         }
 
         private void OWTrackFunc(bool state)
         {
-            tr.TrackOW = state;
+            tr.settings.TrackOW = state;
         }
 
         private void update()
@@ -155,7 +156,19 @@ namespace OWTrack
             else srLabel.Text = tr.startSR.ToString() + " - " + tr.srDiff();
             srTextBox.Text = null;
             saveManeger.SaveJSON(tr);
-        }        
+        }
+
+        private void AddMatch()
+        {
+            Match match = new Match
+            {
+                oldSR = tr.startSR,
+                newSR = tr.newSR,
+                ChangeInSR = tr.srDiff(),
+                dateTime = DateTime.Now
+            };
+            tr.matches.Add(match);
+        }
 
         #region Events
         private void timer1_Tick(object sender, EventArgs e) => checkStatus();
@@ -222,6 +235,7 @@ namespace OWTrack
                 }
                 else tr.newSR = sr;
             }
+            AddMatch();
             update();
         }
 
@@ -239,7 +253,7 @@ namespace OWTrack
 
         private void ChngOWPathBtn_Click(object sender, EventArgs e)
         {
-            tr.gamePath = askForGamePath();
+            tr.settings.GamePath = askForGamePath();
             update();
         }
 
