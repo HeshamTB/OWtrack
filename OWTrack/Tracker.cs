@@ -63,6 +63,11 @@ namespace OWTrack
             Session ses = new Session(startSR);
             //Re do SR input!! 
         }
+
+        public void AddMatch(Match match)
+        {
+            sessions.Last().AddMatch(match);
+        }
         public bool owRunning()
         {
             if (settings.TrackOW)
