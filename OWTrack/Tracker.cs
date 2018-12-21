@@ -37,28 +37,28 @@ namespace OWTrack
         public void rediceLoss() => losses--;
         public int GetWins() { return wins; }
         public int GetLosses() { return losses; }
-        public int GetTotalMatches() 
-        { 
+        public int GetTotalMatches()
+        {
             int number = 0;
             foreach (var session in sessions)
             {
                 number += session.TotalMatches;
             }
-            return number; 
+            return number;
         }
 
         public int GetCurrentSessionMatches()
         {
             return sessions.Last().TotalMatches;
         }
-        
+
         public void setNewSR(int SR) { newSR = SR; }
-        public int srDiff() { return newSR - startSR; }        
+        public int srDiff() { return newSR - startSR; }
         public Settings settings = new Settings();
         //public List<Match> matches = new List<Match>();
-        public List<Session> sessions = new List<Session>();       
+        public List<Session> sessions = new List<Session>();
 
-        public void StartNewSeission() 
+        public void StartNewSeission()
         {
             Session ses = new Session(startSR);
             sessions.Add(ses);
@@ -87,17 +87,17 @@ namespace OWTrack
             }
             else return false;
         }
-      
-        public bool LoacteOW() 
+
+        public bool LoacteOW()
         {
-            try 
+            try
             {
                 DriveInfo[] driveInfo = DriveInfo.GetDrives();
                 List<string> paths = new List<string>();
                 //Searches all drives (too long)
                 //foreach (var drive in driveInfo)
                 //{
-                    //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
+                //paths.AddRange(GetFiles(drive.ToString(),"Overwatch.exe"));
                 //}
                 paths.AddRange(GetFiles(Paths.ProgramFiles.C, "Overwatch.exe"));
                 paths.AddRange(GetFiles(Paths.ProgramFiles.D, "Overwatch.exe"));
@@ -115,14 +115,14 @@ namespace OWTrack
                     settings.GamePath = paths[0];
                     return true;
                 }
-                else return false;                
+                else return false;
             }
             catch (Exception e)
             {
-                 MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message);
                 return false;
-            }                        
-        }                
+            }
+        }
 
         public static IEnumerable<string> GetFiles(string root, string searchPattern)
         {
@@ -151,13 +151,13 @@ namespace OWTrack
 
     class Settings
     {
-       public bool TrackSR, TrackOW = true;
-       public string GamePath = "";
+        public bool TrackSR, TrackOW = true;
+        public string GamePath = "";
 
         /// <summary>
         /// Reset All values to defult  
         /// </summary>
-       public void Reset()
+        public void Reset()
         {
             TrackOW = true;
             TrackSR = true;
@@ -170,9 +170,9 @@ namespace OWTrack
         public int TotalMatches;
         public int SkillChange;
         public int StartSR;
-        List<Match> Matches = new List<Math>();
+        List<Match> Matches = new List<Match>();
         DateTime date;
-        
+
         /// <summary>
         /// Start a new session with a starting Skill Rating
         ///</summary>
@@ -183,7 +183,7 @@ namespace OWTrack
             TotalMatches = 0;
         }
 
-        public bool IsNewSession() 
+        public bool IsNewSession()
         {
             if (Matches.Count == 0) return true;
             else return false;
@@ -201,7 +201,7 @@ namespace OWTrack
         }
     }
 
-    class Match 
+    class Match
     {
         public Match() { }
         public DateTime dateTime { get; set; }
