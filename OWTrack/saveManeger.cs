@@ -24,7 +24,7 @@ using System.IO;
 
 namespace OWTrack
 {
-    public static class Paths
+    public struct Paths
     {
         private static string curDir = Directory.GetCurrentDirectory();
         private static string SAVES = curDir + "/saves/data.json";
@@ -40,7 +40,6 @@ namespace OWTrack
             public const string E = "E:\\Program Files";
             public const string F = "F:\\Program Files";
         }
-
     }
 
     class saveManeger
