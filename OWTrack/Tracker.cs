@@ -71,7 +71,6 @@ namespace OWTrack
         {
             Session ses = new Session(startSR);
             sessions.Add(ses);
-            //Re do SR input!! 
         }
 
         public Session GetCurrentSession()
@@ -216,6 +215,7 @@ namespace OWTrack
         public Match() { }
         public DateTime dateTime { get; set; }
         public int StartSR;
+        public int LastMatchSR;
         public int newSR;
         public int ChangeInSR;
     }

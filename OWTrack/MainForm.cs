@@ -226,12 +226,16 @@ namespace OWTrack
             }
             finally
             {
-                if (!SRonce)
-                {
+                //if (!SRonce)
+                //{
+                //    tr.startSR = sr;
+                //    SRonce = true;
+                //}
+                //else tr.newSR = sr;
+                if (tr.GetCurrentSession().IsNewSession())
                     tr.startSR = sr;
-                    SRonce = true;
-                }
-                else tr.newSR = sr;
+                else
+                    tr.newSR = sr;
             }
             AddMatch();
             update();
