@@ -33,12 +33,12 @@ namespace OWTrack
         public static string GetSaves() { return SAVES; }
         public static string GetCurrentDir() { return curDir; }
 
-        public static class ProgramFiles
+        public struct ProgramFiles
         {
-            public static readonly string C = "C:\\Program Files";
-            public static readonly string D = "D:\\Program Files";
-            public static readonly string E = "E:\\Program Files";
-            public static readonly string F = "F:\\Program Files";
+            public const string C = "C:\\Program Files";
+            public const string D = "D:\\Program Files";
+            public const string E = "E:\\Program Files";
+            public const string F = "F:\\Program Files";
         }
 
     }
