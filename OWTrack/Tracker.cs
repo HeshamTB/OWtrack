@@ -97,6 +97,7 @@ namespace OWTrack
             else return false;
         }
 
+	//change func name to OWexists()
         public bool LoacteOW()
         {
             try
